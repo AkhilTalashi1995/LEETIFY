@@ -11,6 +11,8 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 **Project Demo: [Watch Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
+**[Model Diagram](https://github.com/AkhilTalashi1995/LEETIFY/blob/main/modelDiag.jpeg)**
+
 # Tech stack
 
  - React JS
@@ -46,11 +48,6 @@ Leetify is an online coding platform that offers a diverse collection of challen
 - Client application starts on ```http://localhost:3000```
 
 - Server is available on ```http://localhost:8000```
-
-# Object Model
- <div align="center">
-    <img src="modelDiag.jpeg" alt="Vets Who Code" height="400px" />
- </div>
 
 
 
