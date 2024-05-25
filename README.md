@@ -4,9 +4,11 @@
  
  <H1 align="center">Leetify</H1>
 
-Team Members: @Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka | @Aishwarya Adduri
+**Contributors:**
 
-**[Project Demo](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s):**
+@Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka | @Aishwarya Adduri
+
+**[Watch Project Demo](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
 ## Project Description
 Leetify is an online platform that provides a collection of coding challenges to help developers prepare for technical interviews. The platform offers a wide range of problems that cover various data structures and algorithms, such as arrays, linked lists, trees, graphs, dynamic programming, and more.
