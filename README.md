@@ -1,4 +1,4 @@
-<div background-color: black;>
+<div style="background-color: black;">
  <div align="center">
     <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="125px" />
  </div>
