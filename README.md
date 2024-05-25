@@ -23,10 +23,15 @@ Leetify is an online coding platform that offers a diverse collection of challen
 # Key Features:
 
 **Authentication:** Sign up, log in/out
+
 **User Dashboard:** View stats(problems and submissions)
+
 **Admin Dashboard:** view stats(users, problems and submissions)
+
 **Problem Management:** Problems(CRUD), track submission status
+
 **Code Editor:** Monaco code editor, code compliation and execution
+
 **Deployment & Testing:** Production deployment, automated/manual testing, and bug fixing.
 
 ![model](modelDiag.jpeg)
