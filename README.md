@@ -1,8 +1,3 @@
-<div style="background-color: lightblue; padding: 10px;">
-  This is a div element with a light blue background.
-</div>
-<div bgcolor='red'>
-</div>
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
