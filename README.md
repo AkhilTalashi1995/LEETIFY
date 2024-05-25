@@ -11,15 +11,26 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 **Project Demo: [Watch Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
-**[Watch Project Demo Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
-## Contributors:
+# Overview
+Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
+
+# Contributors: 
 
 **@Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka**
 
-## Project Demo:
+# Project Demo: 
 
-**[Watch Project Demo Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
+**[Watch Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
+
+# Tech stack
+Project is built using the following technologies: 
+ - React JS
+ - Redux
+ - NodeJS
+ - MongoDB
+ - Material UI
+ - SASS
 
 There are three types of users:
 
