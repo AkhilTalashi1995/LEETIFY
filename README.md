@@ -66,10 +66,22 @@ Leetify is an online coding platform that offers a diverse collection of challen
    ```bash
    npm start
 
-6. Paste URL in Search bar:
-   ```bash
-    localhost:3000/
+6. Application is available at:  ```localhost:3000/```
 
+
+# How to start
+
+- clone repo ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
+- run backend
+  - ```cd back-end``` 
+  - ```npm install``` to install dependencies
+  - ```npm start```
+- run frontend
+  - ```cd front-end``` 
+  - ```npm install``` to install dependencies
+  - ```npm start```
+
+- Client application starts on http://localhost:3000 , server apis are available on http://localhost:7000
 
 
 
