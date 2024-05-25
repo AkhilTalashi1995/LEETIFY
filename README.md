@@ -33,55 +33,20 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 # How to start
 
-- **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/AkhilTalashi1995/LEETIFY.git
-
-- **Run the Backend**
-
-1. Navigate to backend directory :
-   ```bash
-   cd back-end
-
-2. Install the dependencies for backend :
-   ```bash
-   npm install
-
-3. Run the backend using the following command :
-   ```bash
-   npm start
-
-- **Run the Frontend**
-
-1. Navigate to ui directory :
-   ```bash
-   cd front-end
-
-2. Install the dependencies for frontend :
-   ```bash
-   npm install
-
-3. Run the frontend using the following command :
-   ```bash
-   npm start
-
-6. Application is available at:  ```localhost:3000/```
-
-
-# How to start
-
 - clone repo ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
+  
 - run backend
   - ```cd back-end``` 
   - ```npm install``` to install dependencies
-  - ```npm start```
+  - ```npm start``` to start the backend server
+
 - run frontend
   - ```cd front-end``` 
   - ```npm install``` to install dependencies
-  - ```npm start```
+  - ```npm start``` to start the client
 
-- Client application starts on http://localhost:3000 , server apis are available on http://localhost:7000
+- Client application starts on ```http://localhost:3000```
+- Server is available on ```http://localhost:8000```
 
 
 
