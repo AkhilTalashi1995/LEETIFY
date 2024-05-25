@@ -1,5 +1,5 @@
  <div align="center">
-    <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="150px" />
+    <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="100px" />
  </div>
  
  <H1 align="center">Leetify</H1>
