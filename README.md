@@ -1,9 +1,9 @@
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
-<H1 align="center">Leetify</H1>
+# <H1 align="center">Leetify</H1>
 
-# Overview
+## Overview
 Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
 
 **Contributors:** @Akhil Talashi | @Snehashis Lenka | @Rutuja Ghate | @Aishwarya Adduri
@@ -12,7 +12,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 [Model Diagram](https://github.com/AkhilTalashi1995/LEETIFY/blob/main/modelDiag.jpeg)
 
-# Tech stack
+## Tech stack
 
  - React JS
  - Redux
@@ -21,7 +21,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
  - Material UI
  - SCSS
 
-# Key Features:
+## Key Features:
 
 - **Authentication:** Sign up, log in/out
 - **User Dashboard:** View stats(problems and submissions)
@@ -30,7 +30,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
 - **Code Editor:** Monaco code editor, code compliation and execution
 - **Deployment & Testing:** Production deployment, automated/manual testing, and bug fixing
 
-# How to start
+## How to start
 
 - Clone Repository ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
   
