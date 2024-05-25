@@ -2,6 +2,7 @@
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
 <H1 align="center">Leetify</H1>
+
 # Overview
 Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
 
