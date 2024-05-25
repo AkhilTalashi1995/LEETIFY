@@ -11,7 +11,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 **Project Demo: [Watch Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
-**[Model Diagram](https://github.com/AkhilTalashi1995/LEETIFY/blob/main/modelDiag.jpeg)
+[Model Diagram](https://github.com/AkhilTalashi1995/LEETIFY/blob/main/modelDiag.jpeg)
 
 # Tech stack
 
