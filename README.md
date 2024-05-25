@@ -7,12 +7,13 @@
 ## Overview
 Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
 
-##Contributors:
+## Contributors:
 
-@Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka | @Aishwarya Adduri
+**@Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka**
 
-**[Watch Project Demo](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
+## Project Demo:
 
+**[Watch Project Demo Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
 
 There are three types of users:
 
