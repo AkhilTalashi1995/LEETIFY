@@ -48,8 +48,10 @@ Leetify is an online coding platform that offers a diverse collection of challen
 - Server is available on ```http://localhost:8000```
 
 # Object Model
+ <div align="center">
+    <img src="modelDiag.jpeg" alt="Vets Who Code" width="200px" height="200px" />
+ </div>
 
-![model](modelDiag.jpeg)
 
 
 
