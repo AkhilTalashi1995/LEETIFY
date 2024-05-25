@@ -1,7 +1,7 @@
-<div background-color: "black">
+<div color: black>
  
     <div align="center">
-       <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="125px" />
+       <img src="/front-end/public/logo-main.png" width="125px" />
     </div>
     
     <H1 align="center">Leetify</H1>
