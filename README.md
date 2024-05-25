@@ -4,8 +4,9 @@
  
  <H1 align="center">Leetify</H1>
 
+Team Members: @Akhil Talashi | @Rutuja Ghate | @Snehashis Lenka | @Aishwarya Adduri
 
-#Project Presentation Link : <a href="https://northeastern-my.sharepoint.com/:v:/g/personal/lenka_s_northeastern_edu/ERYBmhhP1MRMg9z7AS9W1cQBPXfbjBcfm2h5z5N6G6hsHA">Link</a>
+## Project Demo [https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s] 
 
 ## Project Description
 Leetify is an online platform that provides a collection of coding challenges to help developers prepare for technical interviews. The platform offers a wide range of problems that cover various data structures and algorithms, such as arrays, linked lists, trees, graphs, dynamic programming, and more.
@@ -18,15 +19,6 @@ There are three types of users:
 
 -Admin: Users with admin privileges can add new problems, view statistics, and manage users.
 
-## Team Members
-
-Akhil Talashi (NUID: 002776504) Aka “AT”
-
-Rutuja Balkrishna Ghate (NUID: 002749465) Aka “RBG”
-
-Snehashis Lenka (NUID: 002772221) Aka “SL”
-
-Lakshmi Gayatri Aishwarya Adduri (NUID: 002738716) Aka “LGAA”
 
 ## Milestones, User Stories & Task Assignment
 
