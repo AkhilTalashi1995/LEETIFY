@@ -1,4 +1,8 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/0wrsx4Jb)
+<div align="center">
+  <a href="https://vetswhocode.io">
+    <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="400px" />
+  </a>
+</div>
 # LEETIFY 
 
 #Project Presentation Link : <a href="https://northeastern-my.sharepoint.com/:v:/g/personal/lenka_s_northeastern_edu/ERYBmhhP1MRMg9z7AS9W1cQBPXfbjBcfm2h5z5N6G6hsHA">Link</a>
