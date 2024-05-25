@@ -27,26 +27,27 @@ Leetify is an online coding platform that offers a diverse collection of challen
 - **Admin Dashboard:** view stats(users, problems and submissions)
 - **Problem Management:** Problems(CRUD), track submission status
 - **Code Editor:** Monaco code editor, code compliation and execution
-- **Deployment & Testing:** Production deployment, automated/manual testing, and bug fixing.
-
-![model](modelDiag.jpeg)
+- **Deployment & Testing:** Production deployment, automated/manual testing, and bug fixing
 
 # How to start
 
-- clone repo ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
+- Clone Repository ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
   
-- run backend
+- Run Backend
   - ```cd back-end``` 
   - ```npm install``` to install dependencies
   - ```npm start``` to start the backend server
 
-- run frontend
+- Run Frontend
   - ```cd front-end``` 
   - ```npm install``` to install dependencies
   - ```npm start``` to start the client
 
-- Client application starts on ```http://localhost:3000```
+- Client application starts on http://localhost:3000
+
 - Server is available on ```http://localhost:8000```
+
+![model](modelDiag.jpeg)
 
 
 
