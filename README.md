@@ -18,7 +18,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
  - NodeJS
  - MongoDB
  - Material UI
- - SASS
+ - SCSS
 
 # Key Features:
 
