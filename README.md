@@ -1,14 +1,10 @@
-<div style="background-color: black;">
+<div background-color: "black">
  
     <div align="center">
        <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="125px" />
     </div>
     
     <H1 align="center">Leetify</H1>
-</div>
-<div style="color: black; text-align: center; padding: 20px;">
-    <img src="/front-end/public/logo-main.png" alt="Vets Who Code" style="width: 125px;" />
-    <h1 style="color: white;">Leetify</h1>
 </div>
 
 # Overview
