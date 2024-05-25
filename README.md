@@ -31,6 +31,45 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 ![model](modelDiag.jpeg)
 
+# How to start
+
+- **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/AkhilTalashi1995/LEETIFY.git
+
+- **Run the Backend**
+
+1. Navigate to backend directory :
+   ```bash
+   cd back-end
+
+2. Install the dependencies for backend :
+   ```bash
+   npm install
+
+3. Run the backend using the following command :
+   ```bash
+   npm start
+
+- **Run the Frontend**
+
+1. Navigate to ui directory :
+   ```bash
+   cd front-end
+
+2. Install the dependencies for frontend :
+   ```bash
+   npm install
+
+3. Run the frontend using the following command :
+   ```bash
+   npm start
+
+6. Paste URL in Search bar:
+   ```bash
+    localhost:3000/
+
 
 
 
