@@ -1,7 +1,5 @@
-<div style="background-color: black;">
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
-</div>
 </div>
 <H1 align="center">Leetify</H1>
 
