@@ -1,4 +1,7 @@
-<img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="400px" align="center"/>
+ <div align="center">
+    <img src="/front-end/public/logo-main.png" alt="Vets Who Code" width="400px" />
+ </div>
+ 
  <H1 align="center">Leetify</H1>
 
 
