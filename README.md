@@ -49,7 +49,7 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 # Object Model
  <div align="center">
-    <img src="modelDiag.jpeg" alt="Vets Who Code" width="200px" height="200px" />
+    <img src="modelDiag.jpeg" alt="Vets Who Code" height="400px" />
  </div>
 
 
