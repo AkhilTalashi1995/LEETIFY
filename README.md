@@ -1,5 +1,4 @@
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=akhiltalashi1995&label=Profile%20views&color=0e75b6&style=flat" alt="akhiltalashi1995" /> </p>
-
+[![HitCount](https://hits.dwyl.com/akhiltalashi1995/LEETIFY.svg?style=flat-square)](http://hits.dwyl.com/akhiltalashi1995/LEETIFY)
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
