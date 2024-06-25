@@ -1,4 +1,4 @@
-[![Repo Visits](https://hits.dwyl.com/akhiltalashi1995/LEETIFY.svg?style=flat-square)](http://hits.dwyl.com/akhiltalashi1995/LEETIFY)
+[![HitCount](https://hits.dwyl.com/akhiltalashi1995/LEETIFY.svg?style=flat-square)](http://hits.dwyl.com/akhiltalashi1995/LEETIFY)
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
