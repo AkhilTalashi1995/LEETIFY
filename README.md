@@ -1,3 +1,5 @@
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=akhiltalashi1995&label=Profile%20views&color=0e75b6&style=flat" alt="akhiltalashi1995" /> </p>
+
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
