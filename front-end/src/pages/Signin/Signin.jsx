@@ -120,7 +120,16 @@ const Signin = () => {
                 Sign in
               </Button>
             </form>
-
+            <div className="demo-cred">
+              <a
+                href="https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Watch Product Demo Here
+              </a>
+            </div>
+            <br />
             <div className="demo-cred">
               <div>
                 <h4> Demo Admin login:</h4>
