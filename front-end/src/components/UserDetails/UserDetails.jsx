@@ -54,10 +54,7 @@ function UserDetails() {
       password: password,
     };
     axios
-      .put(
-        `https://leetify-backend.vercel.app/users/${userData.user._id}`,
-        data
-      )
+      .put(`http://localhost:8000/users/${userData.user._id}`, data)
       .then((res) => {
         console.log(res.data);
         navigate("/", { replace: true });
