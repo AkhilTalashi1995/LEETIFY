@@ -27,7 +27,7 @@ const Signin = () => {
     event.preventDefault();
     // Make a POST request to the server with the form data
     axios
-      .post("http://leetify.vercel.app/signin", formData)
+      .post("https://leetify.vercel.app/signin", formData)
       .then((response) => {
         console.log(response);
         dispatch({
