@@ -40,7 +40,7 @@ function Home() {
       <div className="usp">
         <div className="usp-content">
           <div className="usp-content-img1">
-            <img src="USP.png" alt="" width="67.2" height="64.4" />
+            <img src="usp.png" alt="" width="67.2" height="64.4" />
           </div>
           <h2 className="usp-heading">Why Choose Us?</h2>
           <p>
