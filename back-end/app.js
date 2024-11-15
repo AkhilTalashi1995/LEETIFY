@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
-import * as dotenv from "dotenv";  // Import dotenv
+import * as dotenv from "dotenv"; // Import dotenv
 
-dotenv.config();  // Load environment variables
+dotenv.config(); // Load environment variables
 
 const app = express();
 app.use(cors());
@@ -17,12 +17,11 @@ app.listen(8000, () => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully!"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
 // mongoose.connect("mongodb://127.0.0.1:27017/leetifydb");
-
 
 // const db = mongoose.connection;
 
