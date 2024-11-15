@@ -210,3 +210,9 @@
   border-radius: 50px;
 }
 
+.demo-cred {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+

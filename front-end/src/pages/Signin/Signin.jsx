@@ -8,16 +8,16 @@ import { Link, NavLink } from "react-router-dom";
 
 const Signin = () => {
   const appState = useSelector((state) => state);
-// Get the dispatch function from the Redux store
+  // Get the dispatch function from the Redux store
   const dispatch = useDispatch();
-// Get the navigate function from the react-router-dom library
+  // Get the navigate function from the react-router-dom library
   const navigate = useNavigate();
-// Create a state object for the form data and set initial values
+  // Create a state object for the form data and set initial values
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-// Handle changes to form input values
+  // Handle changes to form input values
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -25,7 +25,7 @@ const Signin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
- // Make a POST request to the server with the form data
+    // Make a POST request to the server with the form data
     axios
       .post("http://localhost:8000/signin", formData)
       .then((response) => {
@@ -34,7 +34,7 @@ const Signin = () => {
           type: "SIGNIN_SUCCESS",
           payload: response.data,
         });
-// Save the JWT token in local storage
+        // Save the JWT token in local storage
         localStorage.setItem("jwtToken", response.data.token);
         navigate("/home");
       })
@@ -42,7 +42,7 @@ const Signin = () => {
         console.log(error);
       });
   };
-// Handle click on the "Sign up" button
+  // Handle click on the "Sign up" button
   const handleSignUpClick = () => {
     const containerRight = document.querySelector(".right-container");
     if (containerRight) {
@@ -120,6 +120,19 @@ const Signin = () => {
                 Sign in
               </Button>
             </form>
+
+            <div className="demo-cred">
+              <div>
+                <h4> Demo Admin login:</h4>
+                <p>email: admin@gmail.com</p>
+                <p>Password: pass</p>
+              </div>
+              <div>
+                <h4> Demo user login:</h4>
+                <p>email: test@gmail.com</p>
+                <p>Password: test</p>
+              </div>
+            </div>
           </div>
         </div>
       </StyledEngineProvider>
