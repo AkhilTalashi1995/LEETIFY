@@ -44,7 +44,7 @@ const CodeEditor = () => {
       code: JSON.stringify(editorCodeValue),
     };
     axios
-      .post("http://localhost:8000/solutions", data)
+      .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
         console.log(res.data);
         setRunResults(res.data.result);
@@ -66,7 +66,7 @@ const CodeEditor = () => {
       code: JSON.stringify(editorCodeValue),
     };
     axios
-      .post("http://localhost:8000/solutions", data)
+      .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
         console.log(res.data);
         setSubmitResults(res.data);

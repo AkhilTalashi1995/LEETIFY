@@ -16,7 +16,9 @@ const UserDashboardPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/group-submission-count/${userData.user._id}`)
+      .get(
+        `https://leetify-backend.vercel.app/group-submission-count/${userData.user._id}`
+      )
       .then((res) => {
         console.log(res.data);
         let data = {
