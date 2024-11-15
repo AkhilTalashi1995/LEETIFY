@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/neu-mis-info-6150-spring-2023/final-project-group-codelite_lsar/issues"
   },
-  "homepage": "https://github.com/neu-mis-info-6150-spring-2023/final-project-group-codelite_lsar#readme"
+  "homepage": "https://github.com/neu-mis-info-6150-spring-2023/final-project-group-codelite_lsar#readme",
+  "dependencies": {
+    "vercel": "^39.0.2"
+  }
 }
