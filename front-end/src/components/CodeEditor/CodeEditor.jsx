@@ -32,7 +32,7 @@ const CodeEditor = () => {
     console.log(JSON.stringify(newValue));
     seteditorCodeValue(newValue);
   }
-//Handle Run 
+  //Handle Run
   function handleRun() {
     setShowRunResults(true);
     setShowSubmitResults(false);
@@ -44,7 +44,7 @@ const CodeEditor = () => {
       code: JSON.stringify(editorCodeValue),
     };
     axios
-      .post("http://localhost:8000/solutions", data)
+      .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
         console.log(res.data);
         setRunResults(res.data.result);
@@ -55,7 +55,7 @@ const CodeEditor = () => {
       });
   }
   console.log(state);
-// Handle Submit 
+  // Handle Submit
   function handleSubmit() {
     setShowRunResults(false);
     setShouldShowSkeleton(true);
@@ -66,7 +66,7 @@ const CodeEditor = () => {
       code: JSON.stringify(editorCodeValue),
     };
     axios
-      .post("http://localhost:8000/solutions", data)
+      .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
         console.log(res.data);
         setSubmitResults(res.data);
