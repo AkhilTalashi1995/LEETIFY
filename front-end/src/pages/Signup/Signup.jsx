@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import "./signup.css";
-import TextField from "@mui/material/TextField";
-import { Button, CircularProgress, StyledEngineProvider } from "@mui/material";
+import { TextField, Button, CircularProgress } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Link, NavLink } from "react-router-dom";
-import Home from "../Home";
-import CommonFooter from "../../components/CommonFooter/Cfooter";
+import "./auth.scss";
 
-const URL = "http://localhost:8000";
-
-const Signup = () => {
+const SignUp = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -20,159 +13,117 @@ const Signup = () => {
     password: "",
     user_status: "USER",
   });
-  const [signupSpinner, setSignupSpinner] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("submit");
-    await axios
-      .post(`https://leetify-backend.vercel.app/signup`, formData)
-      .then(function (response) {
-        console.log(response.status);
-        if (response.status === 201) {
-          setSignupSpinner(true);
-          setTimeout(() => {
-            navigate("/signin");
-            setSignupSpinner(false);
-          }, 3000);
-        }
-      })
-      .catch(function (error) {
-        if (error.response.status === 409) {
-          setError(true);
-          setTimeout(() => {
-            navigate("/signin");
-            setError(false);
-          }, 2000);
-        } else {
-          console.log("Signup Error", error.message);
-        }
-      });
-  };
+  const handleChange = (e) =>
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSignInClick = () => {
-    const containerRight = document.querySelector(".container-right");
-    containerRight.classList.add("slide-in");
-    setTimeout(() => {
-      navigate("/signin");
-    }, 1000);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+    try {
+      const response = await axios.post(
+        "https://leetify-backend.vercel.app/signup",
+        formData
+      );
+      if (response.status === 201) {
+        setSuccess(true);
+        setTimeout(() => navigate("/signin"), 1600);
+      }
+      setLoading(false);
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        setError("User already exists! Redirecting to login page!");
+        setTimeout(() => {
+          navigate("/signin");
+        }, 1800);
+      } else {
+        setError("Signup failed. Please try again.");
+      }
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <StyledEngineProvider injectFirst>
-        <div className="signup-container">
-          <div className="container-left">
-            <div className="sitebrand1">
-              <Link to="/Home" className="sitebrand1">
-                <img
-                  src="logo-main.png"
-                  alt="leetify-logo"
-                  width="45"
-                  height="45"
-                />
-                <div className="name1">
-                  <span> Leetify</span>
-                </div>
-              </Link>
-            </div>
-            <div className="cont">
-              <h1>Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-            </div>
-            <div className="signin-btnclass">
-              <Button
-                type="submit"
-                variant="contained"
-                className="signin1-btn1 sheen"
-                onClick={handleSignInClick}
-              >
-                Sign in
-              </Button>
-            </div>
+    <div className="auth-bg">
+      <div className="auth-card fade-in-auth">
+        <Link to="/Home" className="auth-logo">
+          <img src="logo-main.png" alt="leetify-logo" />
+          <span>Leetify</span>
+        </Link>
+        <h2>Create your account</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="auth-names">
+            <TextField
+              label="First name"
+              name="firstname"
+              value={formData.firstname}
+              onChange={handleChange}
+              type="text"
+              required
+              variant="outlined"
+              margin="normal"
+              fullWidth
+            />
+            <TextField
+              label="Last name"
+              name="lastname"
+              value={formData.lastname}
+              onChange={handleChange}
+              type="text"
+              required
+              variant="outlined"
+              margin="normal"
+              fullWidth
+            />
           </div>
-          <div className="container-right">
-            <form className="signup-form" onSubmit={handleSubmit}>
-              <h1>Create Account</h1>
-              <TextField
-                name="firstname"
-                className="firstname"
-                label="Firstname"
-                variant="outlined"
-                type="text"
-                required={true}
-                onChange={handleChange}
-                value={formData.firstname}
-              />
-              <br />
-              <TextField
-                name="lastname"
-                className="lastname"
-                label="Lastname"
-                variant="outlined"
-                type="text"
-                required={true}
-                onChange={handleChange}
-                value={formData.lastname}
-              />
-              <br />
-              <TextField
-                name="email"
-                className="email"
-                label="Email"
-                variant="outlined"
-                type="email"
-                required={true}
-                onChange={handleChange}
-                value={formData.email}
-              />
-              <br />
-              <TextField
-                name="password"
-                className="password"
-                label="Password"
-                variant="outlined"
-                type="password"
-                required={true}
-                onChange={handleChange}
-                value={formData.password}
-              />
-              <br />
-
-              {signupSpinner ? (
-                <div className="signup-success">
-                  <CircularProgress className="signup-circular-progress" />
-                  <h5>Sign up successful! Redirecting to login page!</h5>
-                </div>
-              ) : error ? (
-                <div className="signup-fail">
-                  <CircularProgress className="signup-circular-fail" />
-                  <h5>User already exists! Redirecting to login page!</h5>
-                </div>
-              ) : (
-                <Button
-                  type="submit"
-                  variant="contained"
-                  className="signup-btn sheen"
-                  onClick={handleSignInClick}
-                >
-                  Sign up
-                </Button>
-              )}
-            </form>
-          </div>
+          <TextField
+            label="Email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            type="email"
+            fullWidth
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            label="Password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            type="password"
+            fullWidth
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          {error && <div className="auth-error">{error}</div>}
+          {success && (
+            <div className="auth-success">Sign up successful! Redirecting…</div>
+          )}
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            className="auth-btn"
+            disabled={loading || success}
+          >
+            {loading ? <CircularProgress size={24} /> : "Sign Up"}
+          </Button>
+        </form>
+        <div className="auth-alt">
+          <span>Already have an account?</span>
+          <Link to="/signin">Sign in</Link>
         </div>
-      </StyledEngineProvider>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Signup;
+export default SignUp;

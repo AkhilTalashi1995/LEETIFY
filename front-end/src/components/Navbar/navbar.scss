@@ -1,92 +1,262 @@
-
-.Leetify-on-navbar {
-  display: block;
-  margin-top: 5px;
-  font-size: 25px;
-  color: white;
-  font-weight: 700;
+* {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  box-sizing: border-box;
 }
 
-.nav-container {
-  height: 3.5rem;
-  border-bottom: 0.1rem solid transparent;
-  background-image: -webkit-linear-gradient(
-    45deg,
-    #38ef7d,
-    #11998e
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(45deg, #38ef7d, #11998e);
-  background-position: bottom;
-  background-size: 100% 0.1rem;
-  background-repeat: no-repeat;
+.header-section {
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.header-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  width: 100%;
+}
+
+.brand-link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  
+  text-decoration: none;
+}
+.brand-link img {
+  display: block;
+  width: 45px;
+  height: 45px;
+}
+.brand-name {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 12px;
+  letter-spacing: 1px;
+  text-decoration: none;
 }
 
-.logo {
-  margin-left: 8rem;
-  cursor: pointer;
+/* DESKTOP NAV */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 
-  h1 {
-    background-image: linear-gradient(45deg, #38ef7d, #11998e);
-    background-clip: text;
-    -webkit-background-clip: text; /* For Safari */
-    -webkit-text-fill-color: transparent;
+.nav-links a,
+.nav-links .premium {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+
+  span {
+    padding: 8px 16px;
+    border-radius: 1020px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .premium {
+    color: #fea116;
+  }
+  &:hover span,
+  .premium:hover {
+    background: white;
+    color: #111;
+  }
+  .premium:hover {
+    background: #fea116;
+    color: #111;
   }
 }
 
+/* Avatar styling (desktop only) */
+.avatar-btn {
+  padding: 0 !important;
+  min-width: 0 !important;
+}
 .avatar {
   background: linear-gradient(45deg, #38ef7d, #11998e) !important;
   cursor: pointer !important;
 }
 
-.right-nav-fix {
+/* Hamburger menu (hidden on desktop) */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 201;
+  span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+}
+
+/* --- Mobile menu & overlay --- */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 199;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -100vw;
+  width: 75vw;
+  max-width: 320px;
+  height: 100vh;
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  box-shadow: -2px 0 18px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: center;
-  margin-top: 0rem;
-  width: 30rem;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center; // center content horizontally
+  padding: 32px 32px 0 22px;
+  gap: 36px;
+  z-index: 200;
+  transition: right 0.23s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+
+  &.open {
+    right: 0;
+  }
+
+  .mobile-nav-close {
+    background: none;
+    border: none;
+    font-size: 2.3rem;
+    color: #fff;
+    align-self: flex-end;
+    margin-bottom: 18px;
+    cursor: pointer;
+    line-height: 1;
+    margin-right: 0;
+  }
+
+  .mobile-brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+    margin-bottom: 18px;
+    width: 100%;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+    .brand-name {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+      margin-left: 0;
+    }
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    align-items: center; // center the links
+
+    a,
+    .premium {
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+
+      span {
+        color: inherit;
+        background: none;
+        padding: 0;
+      }
+      .premium {
+        color: #fea116;
+        text-shadow: none;
+      }
+    }
+    a:active,
+    a:focus,
+    .premium:active {
+      color: #fea116;
+    }
+
+    /* Mobile menu buttons (Profile, Dashboard, Logout) */
+    .mobile-menu-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.13);
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 1020px;
+      margin: 0;
+      width: 100%;
+      text-align: center;
+
+      &:hover,
+      &:focus {
+        background: #fff;
+        color: #111;
+      }
+    }
+  }
 }
 
-.right-nav-fix > a {
-  text-decoration: none;
+/* Hide desktop nav and show mobile hamburger below 900px */
+@media (max-width: 900px) {
+  .nav-links.desktop-nav {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
 }
 
-.header-nav-fix {
-  display: flex;
-  align-items: center;
-  height: 3.5rem;
-  padding-top: 0;
-  padding-bottom: 0;
-  position: static;
-  
-}
-
-.header-container-div-fix {
-  background: #0f2027; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-}
-
-.white-color{
-  color: white;
-}
-
-
-.leetify-text-decor{
-  text-decoration: none;
+/* Adjust logo & brand for mobile */
+@media (max-width: 600px) {
+  .header-nav {
+    padding: 0.7rem 0.5rem;
+  }
+  .brand-link img {
+    width: 30px;
+    height: 30px;
+  }
+  .brand-name {
+    font-size: 1.15rem;
+    margin-left: 8px;
+  }
 }

@@ -17,6 +17,7 @@ const SubmissionCodePanel = () => {
     <StyledEngineProvider injectFirst>
       <h3 className="submission-code-panel-heading">Your Submitted Code</h3>
       <Editor
+        className="submission-code-panel-editor"
         height="400px"
         defaultLanguage="javascript"
         theme="vs-dark"

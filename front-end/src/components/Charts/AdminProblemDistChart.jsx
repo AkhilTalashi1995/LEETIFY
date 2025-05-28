@@ -1,5 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import "./AdminProblemDistChart.scss";
 
 const data = [
   { name: "Group A", value: 400 },

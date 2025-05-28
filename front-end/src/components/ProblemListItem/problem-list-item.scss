@@ -1,21 +1,62 @@
 .problem-link {
   text-decoration: none;
-  color: black;
+  color: inherit;
+  width: 100%;
+  display: block;
 }
 
 .problem-list-item-container {
-  width: 85%;
-  height: 2rem;
-  background-color: antiquewhite;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 2.6rem;
+  background: #233c47;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin: 0.7rem;
-  padding: 0.5rem 2rem;
+  margin: 0.7rem auto;
+  padding: 0.7rem 2rem;
+  box-shadow: 0 1px 7px 0 rgba(38, 83, 100, 0.10);
+  transition: transform 0.13s, box-shadow 0.14s, background 0.14s;
 }
 
-.problem-list-item-container:hover {
-  transform: scale(1.005);
-  transition: ease;
+.problem-list-item-container h3 {
+  font-size: 1.13rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+  margin: 0;
+  word-break: break-word;
 }
+
+.problem-list-item-container:hover,
+.problem-list-item-container:active {
+  background: #34576a;
+  box-shadow: 0 2px 12px 0 rgba(44, 83, 100, 0.16);
+  transform: scale(1.025);
+}
+
+/* Tablet responsiveness */
+@media (max-width: 900px) {
+  .problem-list-item-container {
+    padding: 0.5rem 1rem;
+    max-width: 98vw;
+  }
+  .problem-list-item-container h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .problem-list-item-container {
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    min-height: 2rem;
+    margin: 0.45rem auto;
+  }
+  .problem-list-item-container h3 {
+    font-size: 0.95rem;
+  }
+}
+

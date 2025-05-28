@@ -1,181 +1,175 @@
 .subscription-container {
-    display: flex;
-    height: 100vh;
-    background: #f7f7f7;
-    transition: transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background: #f7f7f7;
+  width: 100%;
 }
-  
-  .left3-container3 {
-    background: white;
-    width: 40%;
-    height: 100%;
-    box-shadow: 2px 0 5px 2px rgba(133, 124, 124, 0.5);
+
+.left3-container3,
+.right3-container3 {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+
+.left3-container3 {
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  box-shadow: 2px 0 5px 2px rgba(133, 124, 124, 0.12);
 }
 
 .right3-container3 {
-    width: 60%;
-    height: 100%;
-    box-shadow: 0 0 5px 2px rgba(179, 172, 172, 0.5);
-    background: white;
-  
+  justify-content: center;
+  align-items: center;
+  padding: 2.2rem 2.5rem 2.2rem 2.5rem;
+  box-shadow: 0 0 5px 2px rgba(179, 172, 172, 0.08);
+  min-width: 320px;
 }
 
-  .backarrow img{
-    margin-left: 80px;
-    margin-top: 40px;
-    position: absolute;
-    box-shadow: 0 0 5px 2px rgba(179, 172, 172, 0.5);
-    border-radius: 50px;
-  
-  }
-  .storeicon img{
-    margin-left:120px;
-    margin-top: 40px;
-    position: absolute;
-    border-radius: 50px;
-    box-shadow: 0 0 5px 2px rgba(179, 172, 172, 0.5);
+.backarrow img, .storeicon img {
+  margin: 0 18px 18px 0;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: 0 0 5px 2px rgba(179, 172, 172, 0.12);
+}
 
-  
-  }
-  .subscription-form {
-    padding: 12rem 7rem;
-    align-items: center;
-    margin-top: -50px;
-    margin-left: 110px;
-    align-items: stretch;
-    color: grey;
-  }
-  
-  .subscription-form > h1 {
-    margin: 2rem;
-    margin-left: 25px;
-    margin-top: -40px;
-    font-size: 40px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
-  .subbtn {
-    height: 4rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    color: rgb(44, 71, 227);
-    font-weight: 600;
-    letter-spacing: 0.2rem;
-    transition: 0.6s;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    width: 15rem;
-    margin-left: 70px;
-    margin-top: 40px;
-  }
-  
-  .sheen:after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    bottom: -50%;
-    left: -50%;
-    background: linear-gradient(
-      to bottom,
-      rgba(171, 227, 164, 0),
-      rgba(230, 238, 232, 0.5) 50%,
-      rgba(118, 167, 196, 0)
-    );
-    transform: rotateZ(60deg) translate(-25em, 15em);
-  }
-  
-  .sheen:hover::after {
-    animation: sheen 1.5s forwards;
-  }
-  @keyframes sheen {
-    100% {
-      transform: rotateZ(60deg) translate(10em, -15em);
-    }
-  }
-  
-  .card-number, .cardnum{
-    margin: 0.7rem 0 0.7rem 0rem;
-    width: 24rem;
-  }
-  
-  .expiry-date, .expdate{
-    margin: 0.7rem 0 0.7rem 0rem;
-    
-  }
-  .cvv, .cvvdiv{
-    margin: 0.7rem 0 0.7rem 0rem;
-    margin-left: 193px;
-    margin-top:-67px;
-   
-    
-  }
-  .cardholdername, .cardname{
-    margin: 0.7rem 0 0.7rem 0rem;
-    width: 24rem;
-    margin-top: 10px;
-  }
-  .country-select, .coubtrydiv{
-    margin: 0.7rem 0 0.7rem 0rem;
-    width: 24rem;
+.storeicon img {
+  margin-left: 16px;
+}
 
-  }
-  .zip, .zipdiv{
-    margin: 0.7rem 0 0.7rem 0rem;
-    width: 24rem;
-    margin-top: -11.5px;
+.cont3 {
+  margin-top: 80px;
+  margin-left: 16px;
+  color: #454545;
+  max-width: 400px;
+  line-height: 1.6;
+}
 
+.parag1 h2 {
+  font-size: 2.3rem;
+  color: #112233;
+  margin-left: 0;
+  margin-bottom: 0.6rem;
+}
+
+.peryear {
+  margin-left: 1rem;
+  margin-top: 0.1rem;
+  color: #686868;
+}
+
+.cont3 p {
+  margin-left: 0;
+  margin-top: 1rem;
+  font-size: 1.12rem;
+}
+
+.leetifylogo3 {
+  margin: 2.5rem auto 0 auto;
+  align-self: center;
+}
+
+.subscription-form {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  padding: 2rem 0 0 0;
+  color: grey;
+}
+
+.subscription-form > h4 {
+  margin-bottom: 1.1rem;
+  font-size: 1.18rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.subscription-form .MuiTextField-root,
+.subscription-form .MuiSelect-root {
+  width: 100%;
+}
+
+.subbtn {
+  height: 3rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.13rem;
+  border-radius: 10px;
+  width: 100%;
+  background: rgb(49, 114, 205);
+  border: none;
+  margin-top: 1.4rem;
+  transition: background 0.23s;
+}
+
+.subbtn:hover {
+  background: #3561ac;
+}
+
+.terms {
+  font-size: 13px;
+  color: #868686;
+  max-width: 350px;
+  text-align: center;
+  margin: 2.2rem auto 0 auto;
+  line-height: 1.4;
+}
+
+/* Responsive Styles */
+@media (max-width: 950px) {
+  .subscription-container {
+    flex-direction: column;
   }
-  
-  .subbtn {
-    margin: 0.7rem 0 0.7rem 0rem;
-    width: 24rem;
-    margin-left: 0px;
-    color: white;
-    margin-top: 0px;
-    background: rgb(49, 114, 205);  /* fallback for old browsers */
-    border: none;
+  .left3-container3, .right3-container3 {
+    width: 100%;
+    min-height: unset;
+    box-shadow: none;
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+  .leetifylogo3 {
+    margin-top: 2rem;
+  }
+  .right3-container3 {
+    min-width: unset;
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .subscription-container {
+    flex-direction: column;
+    min-height: unset;
+    padding: 0;
+  }
+  .left3-container3, .right3-container3 {
+    padding: 1.3rem 0.6rem 1.1rem 0.6rem;
   }
   .cont3 {
-    color: rgb(96, 92, 92);
-    position: relative;
-    margin-top: 100px;
-    margin-left: 40px;
-    line-height: 2;    
-    text-align: left;
-    max-width: 405px;
+    margin-top: 1.3rem;
+    margin-left: 0;
+    max-width: 100%;
+  }
+  .leetifylogo3 img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .subscription-form {
+    padding: 1rem 0 0 0;
+    max-width: 100%;
+  }
+  .terms {
+    max-width: 98vw;
+    margin-top: 1.4rem;
+    font-size: 12px;
+  }
 }
-  .parag1 h2{
-    margin-left: 30px;
-    font-size: 40px;
-    position: absolute;
-    color: black;
-  }
-  .peryear{
-    margin-left: 200px;
-    margin-top: 13px;
-    max-width: 40px;
-    line-height: 1.5;    
-
-  }
-  
-  .cont3 p{
-    margin-left: 30px;
-    margin-top: 20px;
-  }
-  .leetifylogo3{
-    margin-left: 140px;
-    margin-top: 20px;
-  }
-.terms{
-    position: absolute;
-    font-size: 14px;
-    color: rgb(124, 116, 116);
-    max-width: 360px;
-    text-align: center;
-    margin-top: -180px;
-    margin-left: 230px;
-
-}
-  
-  

@@ -26,7 +26,6 @@ function ThankYou() {
           </div>
         </div>
       </div>
-      <CommonFooter />
     </>
   );
 }

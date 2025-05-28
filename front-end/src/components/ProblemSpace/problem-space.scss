@@ -1,3 +1,99 @@
-.problem-space-container > p {
+.problem-space-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 2.5rem auto 1.5rem auto;
+    padding: 2rem 2.5rem;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 18px 0 rgba(36, 44, 94, 0.11);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    word-break: break-word;
+  }
+  
+  .problem-space-container > h2 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #1a354d;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  
+  .problem-space-container > h4 {
+    font-size: 1.13rem;
+    font-weight: 600;
+    color: #3cddb4;
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  
+  .problem-space-container > p {
+    font-size: 1.08rem;
+    color: #263350;
     margin-top: 1rem;
-}
+    margin-bottom: 0;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+  
+  .example-block {
+    background: #f7f7fa;
+    border-left: 4px solid #42bd9f;
+    border-radius: 8px;
+    padding: 0.95rem 1.1rem;
+    margin-top: 1.3rem;
+    margin-bottom: 0.6rem;
+    width: 100%;
+    color: #222;
+    font-size: 1.01rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    overflow-x: auto;
+  }
+  
+  /* Tablet adjustments */
+  @media (max-width: 900px) {
+    .problem-space-container {
+      max-width: 98vw;
+      padding: 1.3rem 1.1rem;
+    }
+    .problem-space-container > h2 {
+      font-size: 1.45rem;
+    }
+    .problem-space-container > h4 {
+      font-size: 1rem;
+    }
+    .example-block {
+      font-size: 0.97rem;
+      padding: 0.75rem 0.7rem;
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 600px) {
+    .problem-space-container {
+      max-width: 100vw;
+      padding: 0.9rem 0.5rem;
+      border-radius: 8px;
+      margin: 1rem 0 0.7rem 0;
+    }
+    .problem-space-container > h2 {
+      font-size: 1.09rem;
+      margin-bottom: 0.35rem;
+    }
+    .problem-space-container > h4 {
+      font-size: 0.93rem;
+      margin-bottom: 0.8rem;
+    }
+    .problem-space-container > p {
+      font-size: 0.98rem;
+    }
+    .example-block {
+      font-size: 0.93rem;
+      padding: 0.5rem 0.5rem;
+      border-radius: 5px;
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+    }
+  }
+  

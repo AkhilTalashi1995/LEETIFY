@@ -10,35 +10,30 @@ import {
 import Editor from "@monaco-editor/react";
 import SubmitResult from "../SubmitResult/SubmitResult";
 import "./code-editor.scss";
-// starter code from the state object using useEffect
+
 const CodeEditor = () => {
   const state = useSelector((state) => state);
-
   const [editorCodeValue, seteditorCodeValue] = useState("");
-
-  useEffect(() => {
-    seteditorCodeValue(state.selectedProblem.starter_code);
-  }, []);
-
-  const dispatch = useDispatch();
   const [runResults, setRunResults] = useState("");
   const [submitResults, setSubmitResults] = useState({});
   const [shouldShowSkeleton, setShouldShowSkeleton] = useState(false);
   const [showRunResults, setShowRunResults] = useState(false);
   const [showSubmitResults, setShowSubmitResults] = useState(false);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    seteditorCodeValue(state.selectedProblem.starter_code);
+  }, [state.selectedProblem.starter_code]);
+
   function onChange(newValue) {
-    console.log(newValue);
-    console.log(JSON.stringify(newValue));
     seteditorCodeValue(newValue);
   }
-  //Handle Run
+
   function handleRun() {
     setShowRunResults(true);
     setShowSubmitResults(false);
     setShouldShowSkeleton(true);
-    console.log(editorCodeValue);
-    console.log(typeof editorCodeValue);
     const data = {
       problem: state.selectedProblem,
       code: JSON.stringify(editorCodeValue),
@@ -46,20 +41,17 @@ const CodeEditor = () => {
     axios
       .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
-        console.log(res.data);
         setRunResults(res.data.result);
         setShouldShowSkeleton(false);
       })
       .catch((err) => {
-        console.log(err);
+        setShouldShowSkeleton(false);
       });
   }
-  console.log(state);
-  // Handle Submit
+
   function handleSubmit() {
     setShowRunResults(false);
     setShouldShowSkeleton(true);
-
     const data = {
       userData: state.userData,
       problem: state.selectedProblem,
@@ -68,7 +60,6 @@ const CodeEditor = () => {
     axios
       .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
-        console.log(res.data);
         setSubmitResults(res.data);
         setShowSubmitResults(true);
         setShouldShowSkeleton(false);
@@ -77,36 +68,35 @@ const CodeEditor = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setShouldShowSkeleton(false);
       });
   }
 
   return (
     <StyledEngineProvider injectFirst>
-      {state.problemSubmissionStatus ? (
-        <h3 className="code-editor-heading">Submission</h3>
-      ) : (
-        <h3 className="code-editor-heading">Code</h3>
-      )}
-
-      <Editor
-        height="400px"
-        defaultLanguage="javascript"
-        theme="vs-dark"
-        value={editorCodeValue}
-        onChange={onChange}
-        options={{
-          fontSize: 15,
-          wordWrap: "on",
-          automaticLayout: true,
-          scrollBeyondLastLine: false,
-        }}
-      />
-
-      <div>
+      <div className="code-editor-panel">
+        <h3 className="code-editor-heading">
+          {state.problemSubmissionStatus ? "Submission" : "Code"}
+        </h3>
+        <div className="editor-monaco">
+          <Editor
+            height="400px"
+            defaultLanguage="javascript"
+            theme="vs-dark"
+            value={editorCodeValue}
+            onChange={onChange}
+            options={{
+              fontSize: 15,
+              wordWrap: "on",
+              automaticLayout: true,
+              scrollBeyondLastLine: false,
+              minimap: { enabled: false },
+            }}
+          />
+        </div>
         <div className="editor-bottom-container">
           <h3 className="heading-results">Results</h3>
-          <div>
+          <div className="problem-action-buttons">
             <Button variant="contained" className="btn-run" onClick={handleRun}>
               Run
             </Button>

@@ -1,31 +1,147 @@
 @import "../../variables.scss";
 
 .code-editor-heading {
-  margin: 0.7rem 1rem;
+  margin: 0.7rem 1rem 1.2rem 1rem;
+  font-weight: 600;
+  font-size: 1.18rem;
+  letter-spacing: 0.01em;
+  color: #233c47;
 }
 
-.editor-bottom-container {
-  position: relative;
+/* Container for the code editor panel */
+.code-editor-panel {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 28px 0 rgba(44, 83, 100, 0.10);
+  padding: 1.2rem 1.4rem 1.6rem 1.4rem;
   display: flex;
-  margin-top: 0.7rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.editor-monaco {
+  width: 100% !important;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 1px 7px 0 rgba(44, 83, 100, 0.07);
+  margin-bottom: 0.8rem;
+  min-height: 180px;
+}
+
+/* Results & Action Buttons */
+.editor-bottom-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: stretch;
 }
 
 .heading-results {
-  margin-left: 1rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #2c5364;
+  margin-bottom: 0.5rem;
 }
 
-.btn-run {
-  background: $base-background;
-  left: 27rem;
+/* Buttons Row - always centered and stacked on mobile */
+.problem-action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.1rem;
 }
 
-.btn-submit {
-  background: $base-background;
-  left: 28rem;
+/* Buttons */
+.btn-run, .btn-submit {
+  min-width: 110px;
+  font-size: 1.08rem;
+  padding: 12px 0;
+  border-radius: 9999px;
+  font-weight: 600;
+  background-color: #42bd9f !important;
+  color: #fff !important;
+  border: none !important;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  transition: background 0.23s, color 0.16s;
+}
+.btn-run:hover, .btn-submit:hover {
+  background-color: #2d9d81 !important;
+  color: #fff !important;
 }
 
+/* Results panel */
 .results-container {
-  overflow-y: scroll;
-  height: 11rem;
+  overflow-y: auto;
+  max-height: 14rem;
+  background: #f7f7fa;
+  border-radius: 13px;
+  box-shadow: 0 1px 5px 0 rgba(44, 83, 100, 0.08);
+  padding: 16px 14px 12px 14px;
+  margin-top: 1.1rem;
+}
+
+/* Tablet Styles */
+@media (max-width: 900px) {
+  .code-editor-panel {
+    padding: 1rem 0.7rem 1.2rem 0.7rem;
+    border-radius: 14px;
+  }
+  .results-container {
+    max-height: 12rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .code-editor-panel {
+    padding: 0.4rem 0.1rem 0.7rem 0.1rem;
+    border-radius: 9px;
+    box-shadow: 0 2px 12px 0 rgba(44, 83, 100, 0.08);
+  }
+  .editor-monaco {
+    min-height: 120px !important;
+    height: 44vw !important;
+    border-radius: 7px;
+    margin-bottom: 0.6rem;
+  }
+  .results-container {
+    padding: 9px 3px 6px 3px;
+    border-radius: 7px;
+    font-size: 0.97rem;
+    max-height: 7rem;
+  }
+  .btn-run, .btn-submit {
+    width: 100%;
+    font-size: 1rem;
+    min-width: unset;
+    margin: 0;
+  }
+  .problem-action-buttons {
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+  }
+}
+
+/* Monaco override to fix extra white backgrounds on mobile */
+.monaco-editor, .monaco-editor-background, .overflow-guard {
+  background: #181a20 !important;
+  border-radius: 13px !important;
+}
+
+/* Make sure the Editor fits inside small screens */
+@media (max-width: 400px) {
+  .editor-monaco {
+    min-height: 70px !important;
+    height: 32vw !important;
+    border-radius: 6px;
+  }
+  .code-editor-panel {
+    font-size: 0.96rem;
+  }
 }

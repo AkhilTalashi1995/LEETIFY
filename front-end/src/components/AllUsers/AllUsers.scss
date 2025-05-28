@@ -1,34 +1,98 @@
 .user-tablexx {
-    font-family: Arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin: 50px auto;
-    box-shadow: 0px 0px 10px #11998e;
-    position: relative;
-    top: 135px;
-  }
-  
-  .user-tablexx th {
-    background-color: #eea849;
-    color: white;
-    text-align: left;
-    padding: 12px;
-  }
-  
-  .user-tablexx td, .user-tablexx th {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin: 50px auto;
+  box-shadow: 0px 0px 10px #11998e;
+  position: relative;
+  top: 135px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+
+  th, td {
     border: 1px solid #ddd;
     padding: 12px;
   }
-  
-  .user-tablexx tbody tr:nth-child(even) {
+
+  th {
+    background-color: #eea849;
+    color: white;
+    text-align: left;
+    font-size: 1.07rem;
+  }
+
+  td {
+    font-size: 1rem;
+  }
+
+  tbody tr:nth-child(even) {
     background-color: #f5e0c1;
   }
-  
-  .user-tablexx tbody tr:hover {
+  tbody tr:hover {
     background-color: #ddd;
+    td {
+      background-color: #f4c875;
+    }
   }
-  
-  .user-tablexx tbody tr:hover td {
-    background-color: #f4c875;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .user-tablexx {
+    width: 98%;
+    margin: 30px auto;
+    top: 70px;
+    font-size: 0.97rem;
   }
-  
+}
+
+@media (max-width: 700px) {
+  .user-tablexx {
+    width: 100%;
+    margin: 18px 0;
+    top: 30px;
+    font-size: 0.95rem;
+    border-radius: 0;
+    box-shadow: 0 2px 8px #11998e23;
+  }
+  .user-tablexx thead {
+    display: none;
+  }
+  .user-tablexx, .user-tablexx tbody, .user-tablexx tr, .user-tablexx td {
+    display: block;
+    width: 100%;
+  }
+  .user-tablexx tr {
+    margin-bottom: 18px;
+    box-shadow: 0 2px 7px 0 #11998e1a;
+    border-radius: 7px;
+    background: #fff;
+    border: 1px solid #eea8491a;
+    padding: 8px 0;
+  }
+  .user-tablexx td {
+    border: none;
+    border-bottom: 1px solid #f5e0c1;
+    position: relative;
+    padding-left: 40%;
+    text-align: left;
+    font-size: 1rem;
+    min-height: 45px;
+    background: none !important;
+  }
+  .user-tablexx td:last-child {
+    border-bottom: none;
+  }
+  .user-tablexx td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    font-weight: bold;
+    color: #eea849;
+    font-size: 0.97rem;
+    width: 38%;
+    white-space: nowrap;
+  }
+}

@@ -38,7 +38,6 @@ function UserHome() {
         <>
           <Navbar />
           <ProblemListing />
-          <CommonFooter />
           {/* <UserDetails /> */}
           {/* <AllUsers/> */}
           {/* <ProblemsSolvedByUser/> */}

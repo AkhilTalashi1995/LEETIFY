@@ -1,44 +1,50 @@
-.admin-page-container {
+.admin-page-main {
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
-}
-
-.admin-page-sidebar {
-  height: calc(100vh - 3.6rem);
-  flex: 1.5;
-  padding: 0 0.7rem;
-  background: #0f2027; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    45deg,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    45deg,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  justify-content: center;
+  align-items: flex-start;
+  background: #f9fafd;
+  padding-top: 4.8rem; // Space for navbar
 }
 
 .admin-page-content {
-  flex: 9;
-}
-
-.admin-page-btn-container {
-  height: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 70vh;
+  background: #fff;
+  margin: 0 auto;
+  padding: 2.2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(60, 80, 100, 0.07);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  border-radius: 0.7rem;
-  cursor: pointer;
-  background-color: white;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-.admin-page-btn-container:hover {
-  box-shadow: -1px -1px 11px 0px rgba(224, 236, 236, 0.75);
-  -webkit-box-shadow: -1px -1px 11px 0px rgba(224, 236, 236, 0.75);
-  -moz-box-shadow: -1px -1px 11px 0px rgba(224, 236, 236, 0.75);
-  transform: scale(1.02);
+/* Tablet adjustments */
+@media (max-width: 1000px) {
+  .admin-page-content {
+    max-width: 98vw;
+    padding: 1.3rem 1rem;
+    border-radius: 13px;
+    gap: 1.3rem;
+  }
+  .admin-page-main {
+    padding-top: 3.5rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .admin-page-main {
+    padding-top: 2.3rem;
+  }
+  .admin-page-content {
+    padding: 0.7rem 0.3rem;
+    border-radius: 7px;
+    min-height: 60vh;
+    box-shadow: 0 2px 13px 0 rgba(60, 80, 100, 0.08);
+    gap: 0.7rem;
+  }
 }

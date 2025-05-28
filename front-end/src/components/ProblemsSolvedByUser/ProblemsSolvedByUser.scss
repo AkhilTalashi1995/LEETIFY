@@ -1,49 +1,91 @@
 .problem-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  left: 50px;
-  bottom: -145px;
+  background: whitesmoke;
+  width: 100%;
+  max-width: 650px;
+  margin: 32px auto 0 auto;
+  box-shadow: 0px 0 8px 2px #11998e22;
+  border-radius: 18px;
   position: relative;
   z-index: 1;
-  background: whitesmoke;
-  width: 619px;
-  box-shadow: 0px 0 5px 2px #11998e;
-  text-align: center
-  }
+  padding: 2rem 1.3rem 1.3rem 1.3rem;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
 
-  .text1 {
-    font-size: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 10px;
-    // border-bottom: 1px solid #ccc;
-  }
+.text1 {
+  font-size: 1.35rem;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 12px 0 18px 0;
+  font-weight: 600;
+  color: #222;
+}
 
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0.4rem;
+}
+
+.problem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1.07rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background 0.18s, color 0.15s;
+  cursor: pointer;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+.problem:nth-child(even) {
+  background-color: #e0f7fa;
+}
+.problem:nth-child(odd) {
+  background-color: #c0e9e2;
+}
+
+.problem-list .problem:hover {
+  background-color: #b2dfdb;
+  color: #203a43;
+}
+
+@media (max-width: 650px) {
+  .problem-container {
+    max-width: 99vw;
+    padding: 1.3rem 2vw 1.1rem 2vw;
+    font-size: 1.05rem;
+  }
   .problem-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 95%;
+    gap: 0.3rem;
   }
-
   .problem {
-    padding: 5px;
-    display: block;
-    width: 100%;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    padding: 9px 10px;
   }
+}
 
-  .problem-list .problem:hover {
-    background-color: #ddd;
+@media (max-width: 430px) {
+  .problem-container {
+    padding: 1rem 0.7rem 1rem 0.7rem;
   }
-
-  .problem:nth-child(even) {
-    background-color: #f2f2f2;
+  .text1 {
+    font-size: 1.04rem;
+    padding: 10px 0 10px 0;
   }
-
-  .problem:nth-child(odd) {
-    background-color: #a1d2d9;
+  .problem {
+    font-size: 0.98rem;
+    padding: 7px 6px;
+    min-height: 40px;
   }
+}

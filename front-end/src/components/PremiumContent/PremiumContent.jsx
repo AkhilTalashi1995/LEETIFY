@@ -23,7 +23,10 @@ function PremiumContent() {
             Our monthly and yearly plans, grants access to{" "}
             <span>
               {" "}
-              all premium <br />
+              all premium{" "}
+              <span className="d-none d-md-inline">
+                <br />
+              </span>
               features
             </span>
             , the best plans for all subscribers.
@@ -31,7 +34,6 @@ function PremiumContent() {
         </div>
 
         {/* subscription section*/}
-        
       </section>
     </>
   );

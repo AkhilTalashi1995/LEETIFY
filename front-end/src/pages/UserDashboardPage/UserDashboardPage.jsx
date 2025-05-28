@@ -49,11 +49,7 @@ const UserDashboardPage = () => {
       <Navbar />
       <StyledEngineProvider injectFirst>
         <div className="admin-page-container">
-          <div className="admin-page-sidebar">
-            <div className="admin-page-btn-container">
-              <h4>Dashboard</h4>
-            </div>
-          </div>
+         
           <div className="admin-page-content">
             <div className="user-dashboard-container">
               <div className="ud-block-1">

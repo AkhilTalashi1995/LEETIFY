@@ -24,7 +24,6 @@ function CancelTransaction() {
           </div>
         </div>
       </div>
-      <CommonFooter />
     </>
   );
 }

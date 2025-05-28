@@ -14,7 +14,6 @@ function InnerPremiumPage() {
       <PremiumContent />
       <InnerPremiumSubCard />
       <CustomerReviews />
-      <CommonFooter />
     </>
   );
 }

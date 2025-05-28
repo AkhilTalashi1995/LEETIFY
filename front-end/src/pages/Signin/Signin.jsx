@@ -1,152 +1,118 @@
 import React, { useState } from "react";
-import "./signin.css";
+import { TextField, Button, CircularProgress } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, StyledEngineProvider, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import "../Signup/auth.scss";
 
-const Signin = () => {
+const SignIn = () => {
   const appState = useSelector((state) => state);
-  // Get the dispatch function from the Redux store
   const dispatch = useDispatch();
-  // Get the navigate function from the react-router-dom library
   const navigate = useNavigate();
-  // Create a state object for the form data and set initial values
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  // Handle changes to form input values
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Make a POST request to the server with the form data
+    setLoading(true);
+    setErr("");
     axios
       .post("https://leetify-backend.vercel.app/signin", formData)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: "SIGNIN_SUCCESS",
           payload: response.data,
         });
-        // Save the JWT token in local storage
         localStorage.setItem("jwtToken", response.data.token);
+        setLoading(false);
         navigate("/home");
       })
       .catch((error) => {
-        console.log(error);
+        setErr("Invalid credentials. Please try again.");
+        setLoading(false);
       });
-  };
-  // Handle click on the "Sign up" button
-  const handleSignUpClick = () => {
-    const containerRight = document.querySelector(".right-container");
-    if (containerRight) {
-      containerRight.classList.add("slide-in");
-      setTimeout(() => {
-        navigate("/signup");
-      }, 1000);
-    }
   };
 
   return (
-    <>
-      <StyledEngineProvider injectFirst>
-        <div className="signin-container">
-          <div className="left-container">
-            <div className="sitebrand2">
-              <Link to="/Home" className="sitebrand2">
-                <img
-                  src="logo-main.png"
-                  alt="leetify-logo"
-                  width="45"
-                  height="45"
-                />
-                <div className="name2">
-                  <span> Leetify</span>
-                </div>
-              </Link>
+    <div className="auth-bg">
+      <div className="auth-card fade-in-auth">
+        <Link to="/Home" className="auth-logo">
+          <img src="logo-main.png" alt="leetify-logo" />
+          <span>Leetify</span>
+        </Link>
+        <h2>Sign in to your account</h2>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            type="email"
+            fullWidth
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            label="Password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            type="password"
+            fullWidth
+            required
+            margin="normal"
+            variant="outlined"
+          />
+          {err && <div className="auth-error">{err}</div>}
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            className="auth-btn"
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : "Sign In"}
+          </Button>
+        </form>
+        <div className="auth-alt">
+          <span>Don’t have an account?</span>
+          <Link to="/signup">Sign up</Link>
+        </div>
+        {/* Demo credentials for recruiters */}
+        <div className="auth-demo">
+          <div>
+            <strong>Demo Admin login:</strong>
+            <div>
+              <span>Email:</span>{" "}
+              <span className="auth-demo-email">admin@gmail.com</span>
             </div>
-            <div className="cont2">
-              <h1>Hello Friend!</h1>
-              <p>Enter your personal details and start your journey with us</p>
-            </div>
-            <div className="signup2-btnclass2">
-              <Button
-                type="submit"
-                variant="contained"
-                className="signup2-btn2 sheen"
-                onClick={handleSignUpClick}
-              >
-                Sign up
-              </Button>
+            <div>
+              <span>Password:</span>{" "}
+              <span className="auth-demo-pass">pass</span>
             </div>
           </div>
-          <div className="right-container">
-            <form className="signin-form" onSubmit={handleSubmit}>
-              <h1>Sign in to Leetify!</h1>
-              <TextField
-                name="email"
-                className="email-signin"
-                label="Email"
-                variant="outlined"
-                type="email"
-                required={true}
-                onChange={handleChange}
-                value={formData.email}
-              />
-              <br />
-
-              <TextField
-                name="password"
-                className="password-signin"
-                label="Password"
-                variant="outlined"
-                type="password"
-                required={true}
-                onChange={handleChange}
-                value={formData.password}
-              />
-              <br />
-              <Button
-                type="submit"
-                variant="contained"
-                className="signin-btn sheen"
-              >
-                Sign in
-              </Button>
-            </form>
-            <div className="demo-cred">
-              <a
-                href="https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Watch Product Demo Here
-              </a>
+          <div style={{ marginTop: 16 }}>
+            <strong>Demo user login:</strong>
+            <div>
+              <span>Email:</span>{" "}
+              <span className="auth-demo-email">test@gmail.com</span>
             </div>
-            <br />
-            <div className="demo-cred">
-              <div>
-                <h4> Demo Admin login:</h4>
-                <p>email: admin@gmail.com</p>
-                <p>Password: pass</p>
-              </div>
-              <div>
-                <h4> Demo user login:</h4>
-                <p>email: test@gmail.com</p>
-                <p>Password: test</p>
-              </div>
+            <div>
+              <span>Password:</span>{" "}
+              <span className="auth-demo-pass">test</span>
             </div>
           </div>
         </div>
-      </StyledEngineProvider>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Signin;
+export default SignIn;

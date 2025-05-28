@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 function ProblemListItem({ problem }) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  console.log("from problemlistitem", problem);
+
   const handleClick = () => {
     dispatch({ type: "SET_SELECTED_PROBLEM", payload: problem });
-    console.log(state);
   };
 
   return (

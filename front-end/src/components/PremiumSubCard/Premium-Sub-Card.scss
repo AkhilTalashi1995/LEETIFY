@@ -1,0 +1,225 @@
+.subscription-card {
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    align-items: stretch;
+    margin: 32px auto;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1150px;
+  }
+  
+  .sub-card {
+    flex: 1 1 380px;
+    max-width: 450px;
+    min-width: 300px;
+    background: #f7f7f7;
+    border-radius: 20px;
+    box-shadow: 0 6px 32px 0 rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    padding: 36px 32px 32px 32px;
+    position: relative;
+    transition: transform 0.2s;
+    margin-bottom: 32px;
+  
+    &:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow: 0 10px 32px 2px rgba(0,0,0,0.10);
+    }
+    .sub-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .sub-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #222;
+      margin-right: 10px;
+    }
+    .sub-card-billing {
+      font-size: 1.1rem;
+      color: #757575;
+      margin-top: 2px;
+    }
+    .most-popular-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #ffdea8;
+      color: #b57b13;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 4px 16px 4px 8px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px 0 rgba(252, 197, 126, 0.12);
+      letter-spacing: 0.01em;
+      margin-left: 16px;
+      z-index: 1;
+      // only show for yearly card
+      .yearly & { display: flex; }
+    }
+    .sub-card-desc {
+      font-size: 1rem;
+      color: #5c5c5c;
+      margin-bottom: 24px;
+      strong {
+        color: #222;
+        font-weight: 600;
+      }
+    }
+    .sub-card-price-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .sub-card-price {
+      font-size: 2.7rem;
+      font-weight: 700;
+      color: #232323;
+      line-height: 1.1;
+    }
+    .sub-card-unit {
+      font-size: 1.1rem;
+      color: #818181;
+      margin-bottom: 7px;
+    }
+    .sub-card-btn {
+      width: 100%;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.12rem;
+      font-weight: 500;
+      padding: 13px 0 12px 0;
+      margin-top: auto;
+      cursor: pointer;
+      box-shadow: 0 1px 5px 0 rgba(0,0,0,0.06);
+      transition: background 0.17s, color 0.13s;
+      &:hover {
+        background: linear-gradient(90deg, #eea849, #f46b45);
+        color: #232323;
+      }
+    }
+  }
+  
+  /* Yearly Card */
+  .sub-card.yearly {
+    background: linear-gradient(135deg, #ffe9cf 0%, #ffe3c4 100%);
+    position: relative;
+    .most-popular-badge {
+      display: flex;
+    }
+  }
+  
+  /* Hide most-popular on monthly */
+  .sub-card.monthly .most-popular-badge {
+    display: none;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 950px) {
+    .subscription-card {
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .sub-card {
+      max-width: 95vw;
+      min-width: unset;
+      margin: 0 auto 32px auto;
+    }
+  }
+  @media (max-width: 600px) {
+    .sub-card {
+      padding: 14px 4vw 18px 4vw;   // less horizontal padding
+      font-size: 0.97rem;
+      max-width: 360px;             // tighter card width
+      min-width: 0;
+      margin: 0 auto 22px auto;     // center on mobile
+      border-radius: 14px;
+      .sub-card-title { font-size: 1.13rem; }
+      .sub-card-price { font-size: 1.6rem; }
+      .sub-card-btn { font-size: 0.98rem; }
+      .most-popular-badge { font-size: 0.82rem; padding: 3px 10px 3px 6px;}
+    }
+    .subscription-card {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 0 0.5rem;
+    }
+  }
+  
+  
+
+  .premium-modal-backdrop {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInBackdrop 0.25s;
+  }
+  @keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .premium-modal {
+    background: #fff;
+    padding: 32px 28px 22px 28px;
+    border-radius: 16px;
+    box-shadow: 0 6px 36px 0 rgba(0,0,0,0.17);
+    max-width: 350px;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: modalPopIn 0.22s cubic-bezier(0.45,1.14,0.61,0.98);
+  }
+  
+  @keyframes modalPopIn {
+    from { transform: scale(0.93); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  .premium-modal h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: #222;
+  }
+  .premium-modal p {
+    color: #444;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .premium-modal-btn {
+    background: linear-gradient(90deg, #eea849, #f46b45);
+    color: #222;
+    font-weight: 600;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.13s;
+    box-shadow: 0 2px 8px 0 rgba(255, 186, 68, 0.09);
+  }
+  .premium-modal-btn:hover {
+    background: #232323;
+    color: #fff;
+  }
+  

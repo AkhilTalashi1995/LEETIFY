@@ -1,49 +1,106 @@
 .lockedproblem-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    left: 755px;
-    bottom: 44px;
-    position: relative;
-    z-index: 1;
-    background: whitesmoke;
-    width: 619px;
-    box-shadow: 0px 0 5px 2px #eea849;
-    text-align: center;
-    }
-  
-    .text1 {
-      font-size: 20px;
-      font-family: 'Courier New', Courier, monospace;
-      padding: 10px;
-      // border-bottom: 1px solid #ccc;
-    }
-  
-    .lockedproblem-list {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      width: 95%;
-    }
-  
-    .lockedproblem {
-      padding: 5px;
-      display: block;
-      width: 100%;
-      transition: background-color 0.3s ease;
-    }
-  
-    .lockedproblem-list .lockedproblem:hover {
-      background-color: #ddd;
-    }
-  
-    .lockedproblem:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-  
-    .lockedproblem:nth-child(odd) {
-      background-color: #f4cb8f;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  background: whitesmoke;
+  width: 95%;
+  max-width: 620px;
+  min-width: 0;
+  margin: 2.3rem auto 1.3rem auto;
+  box-shadow: 0px 0 5px 2px #eea849;
+  text-align: center;
+  border-radius: 13px;
+  padding: 1.1rem 1.2rem;
+}
+
+.text1 {
+  font-size: 1.22rem;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 12px 0 9px 0;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.lockedproblem-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 6px 0;
+  width: 100%;
+}
+
+.lockedproblem {
+  padding: 7px 0 7px 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  gap: 0.7rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.lockedproblem-list .lockedproblem:hover {
+  background-color: #f4f1e3;
+}
+
+.lockedproblem:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.lockedproblem:nth-child(odd) {
+  background-color: #f4cb8f;
+}
+
+/* Icon adjustments for better alignment on mobile */
+.lock-icon {
+  min-width: 16px;
+  margin-right: 8px;
+  font-size: 1.02rem;
+}
+
+/* Tablet adjustments */
+@media (max-width: 900px) {
+  .lockedproblem-container {
+    max-width: 96vw;
+    padding: 0.8rem 0.6rem;
+  }
+  .text1 {
+    font-size: 1.06rem;
+  }
+  .lockedproblem {
+    font-size: 0.98rem;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .lockedproblem-container {
+    width: 99vw;
+    max-width: 99vw;
+    min-width: 0;
+    padding: 0.55rem 0.15rem;
+    margin: 1.1rem auto 0.7rem auto;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px 0 #eea84990;
+  }
+  .text1 {
+    font-size: 0.96rem;
+    padding: 7px 0 7px 0;
+  }
+  .lockedproblem {
+    font-size: 0.95rem;
+    gap: 0.32rem;
+    padding: 5px 0 5px 0;
+  }
+  .lock-icon {
+    font-size: 0.95rem;
+    min-width: 14px;
+    margin-right: 6px;
+  }
+}

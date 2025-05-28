@@ -1,0 +1,32 @@
+.problem-dist-chart-container {
+    width: 100%;
+    max-width: 400px;
+    min-width: 220px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    height: 320px; // For desktop and tablets
+  
+    @media (max-width: 900px) {
+      height: 240px;
+      max-width: 320px;
+      min-width: 170px;
+    }
+  
+    @media (max-width: 600px) {
+      height: 180px;
+      max-width: 98vw;
+      min-width: 100px;
+      padding: 0.5rem 0;
+    }
+  
+    .recharts-wrapper {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  
+    .recharts-surface {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+  

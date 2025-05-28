@@ -12,7 +12,6 @@ function UserProfile() {
     <>
       <Navbar />
       <UserDetails />
-      <CommonFooter />
     </>
   );
 }

@@ -134,13 +134,13 @@ function ProblemListing() {
         your progress towards the next level in your programming career.{" "}
       </p>
       <div className="problem-cat-container ">
-        <div className="problem-cat easy sheen" onClick={handleEasy}>
+        <div className="problem-cat easy " onClick={handleEasy}>
           <h3>Easy</h3>
         </div>
-        <div className="problem-cat medium sheen" onClick={handleMedium}>
+        <div className="problem-cat medium " onClick={handleMedium}>
           <h3>Medium</h3>
         </div>
-        <div className="problem-cat hard sheen" onClick={handleHard}>
+        <div className="problem-cat hard " onClick={handleHard}>
           <h3>Hard</h3>
         </div>
       </div>

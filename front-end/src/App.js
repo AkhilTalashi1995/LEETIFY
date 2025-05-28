@@ -80,7 +80,6 @@ function App() {
           path="/comingsoon"
           element={<ProtectedRoute element={<ComingSoon />} />}
         />
-       
       </Routes>
     </BrowserRouter>
   );
