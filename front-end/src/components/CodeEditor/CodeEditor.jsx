@@ -14,8 +14,8 @@ import "./code-editor.scss";
 const CodeEditor = () => {
   const state = useSelector((state) => state);
   const [editorCodeValue, seteditorCodeValue] = useState("");
-  const [runResults, setRunResults] = useState("");
-  const [submitResults, setSubmitResults] = useState({});
+  const [runResults, setRunResults] = useState(null);
+  const [submitResults, setSubmitResults] = useState(null);
   const [shouldShowSkeleton, setShouldShowSkeleton] = useState(false);
   const [showRunResults, setShowRunResults] = useState(false);
   const [showSubmitResults, setShowSubmitResults] = useState(false);
@@ -41,7 +41,7 @@ const CodeEditor = () => {
     axios
       .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
-        setRunResults(res.data.result);
+        setRunResults(res.data); // store whole response object!
         setShouldShowSkeleton(false);
       })
       .catch((err) => {
@@ -52,6 +52,7 @@ const CodeEditor = () => {
   function handleSubmit() {
     setShowRunResults(false);
     setShouldShowSkeleton(true);
+    setShowSubmitResults(false);
     const data = {
       userData: state.userData,
       problem: state.selectedProblem,
@@ -60,7 +61,7 @@ const CodeEditor = () => {
     axios
       .post("https://leetify-backend.vercel.app/solutions", data)
       .then((res) => {
-        setSubmitResults(res.data);
+        setSubmitResults(res.data); // store whole response object!
         setShowSubmitResults(true);
         setShouldShowSkeleton(false);
         if (res.data.status === "Accepted") {
@@ -110,35 +111,25 @@ const CodeEditor = () => {
           </div>
         </div>
         <Container className="results-container">
-          {showRunResults ? (
-            runResults ? (
-              <div>
-                <h3>{runResults}</h3>
-              </div>
-            ) : shouldShowSkeleton ? (
-              <>
-                <Skeleton />
-                <Skeleton animation="wave" />
-                <Skeleton animation={false} />
-              </>
-            ) : (
-              ""
-            )
-          ) : showSubmitResults ? (
-            <SubmitResult
-              problem={state.selectedProblem}
-              results={submitResults}
-              showingSubmittedCode={false}
-            />
-          ) : shouldShowSkeleton ? (
+          {shouldShowSkeleton ? (
             <>
               <Skeleton />
               <Skeleton animation="wave" />
               <Skeleton animation={false} />
             </>
-          ) : (
-            ""
-          )}
+          ) : showRunResults && runResults ? (
+            <SubmitResult
+              problem={state.selectedProblem}
+              results={runResults}
+              showingSubmittedCode={false}
+            />
+          ) : showSubmitResults && submitResults ? (
+            <SubmitResult
+              problem={state.selectedProblem}
+              results={submitResults}
+              showingSubmittedCode={false}
+            />
+          ) : null}
         </Container>
       </div>
     </StyledEngineProvider>
