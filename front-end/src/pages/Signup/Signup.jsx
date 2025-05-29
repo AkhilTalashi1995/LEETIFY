@@ -27,7 +27,7 @@ const SignUp = () => {
     setSuccess(false);
     try {
       const response = await axios.post(
-        "leetify-backend.vercel.app/signup",
+        "https://leetify-backend.vercel.app/signup",
         formData
       );
       if (response.status === 201) {

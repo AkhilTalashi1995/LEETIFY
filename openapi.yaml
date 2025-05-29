@@ -7,7 +7,7 @@ externalDocs:
   description: Github Source
   url: https://github.com/neu-mis-info-6150-spring-2023/final-project-group-codelite_lsar
 servers:
-  - url: leetify-backend.vercel.app/
+  - url: https://leetify-backend.vercel.app/
 tags:
   - name: users
     description: User endpoints

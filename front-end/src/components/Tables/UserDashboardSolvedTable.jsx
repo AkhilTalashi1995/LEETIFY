@@ -39,7 +39,7 @@ export default function UserDashboardSolvedTable() {
   useEffect(() => {
     axios
       .get(
-        `leetify-backend.vercel.app/getAllUserSumbissions/${userData.user._id}`
+        `https://leetify-backend.vercel.app/getAllUserSumbissions/${userData.user._id}`
       )
       .then((res) => {
         setTableData(res.data.results);

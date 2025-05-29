@@ -52,4 +52,4 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 - Client application starts on `http://localhost:3000`
 
-- Server is available on `leetify-backend.vercel.app`
+- Server is available on `https://leetify-backend.vercel.app`
