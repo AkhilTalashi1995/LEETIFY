@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/submissions")
+      .get("leetify-backend.vercel.app/submissions")
       .then((res) => {
         console.log(res.data.submissions);
         setGetAllSubmissions(res.data.submissions);
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
     ]);
 
     axios
-      .get("http://localhost:8000/users")
+      .get("leetify-backend.vercel.app/users")
       .then((res) => {
         console.log(res.data.users);
         setGetAllUsers(res.data.users);

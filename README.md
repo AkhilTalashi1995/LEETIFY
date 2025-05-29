@@ -1,10 +1,12 @@
 [![HitCount](https://hits.dwyl.com/akhiltalashi1995/LEETIFY.svg?style=flat-square)](http://hits.dwyl.com/akhiltalashi1995/LEETIFY)
+
 <div align="center">
 <img src="/front-end/public/logo-main.png" width="125px" />
 </div>
 <H1 align="center">Leetify</H1>
 
 ## Overview
+
 Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
 
 **Contributors:** @Akhil Talashi | @Snehashis Lenka | @Rutuja Ghate | @Aishwarya Adduri
@@ -17,12 +19,12 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 ## Tech stack
 
- - React JS
- - Redux
- - NodeJS
- - MongoDB
- - Material UI
- - SCSS
+- React JS
+- Redux
+- NodeJS
+- MongoDB
+- Material UI
+- SCSS
 
 ## Key Features:
 
@@ -35,26 +37,19 @@ Leetify is an online coding platform that offers a diverse collection of challen
 
 ## How to start
 
-- Clone Repository ```git clone https://github.com/AkhilTalashi1995/LEETIFY.git```
-  
+- Clone Repository `git clone https://github.com/AkhilTalashi1995/LEETIFY.git`
 - Run Backend
-  - ```cd back-end``` 
-  - ```npm install``` to install dependencies
-  - ```npm start``` to start the backend server
+
+  - `cd back-end`
+  - `npm install` to install dependencies
+  - `npm start` to start the backend server
 
 - Run Frontend
-  - ```cd front-end``` 
-  - ```npm install``` to install dependencies
-  - ```npm start``` to start the client
 
-- Client application starts on ```http://localhost:3000```
+  - `cd front-end`
+  - `npm install` to install dependencies
+  - `npm start` to start the client
 
-- Server is available on ```http://localhost:8000```
+- Client application starts on `http://localhost:3000`
 
-
-
-
-
-
-
-
+- Server is available on `leetify-backend.vercel.app`

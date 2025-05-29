@@ -72,7 +72,7 @@ const SetProblem = () => {
         solution: formData.solution,
       };
       axios
-        .post("http://localhost:8000/problems", problemData, {
+        .post("leetify-backend.vercel.app/problems", problemData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
             "Content-Type": "application/json",
