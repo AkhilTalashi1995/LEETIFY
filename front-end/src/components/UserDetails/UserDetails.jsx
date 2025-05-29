@@ -29,10 +29,7 @@ function UserDetails() {
       password: password,
     };
     axios
-      .put(
-        `https://leetify-backend.vercel.app/users/${userData.user._id}`,
-        data
-      )
+      .put(`http://localhost:8000/users/${userData.user._id}`, data)
       .then((res) => {
         window.alert("Profile updated successfully!");
         navigate("/", { replace: true });

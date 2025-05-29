@@ -16,9 +16,7 @@ const UserDashboardPage = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://leetify-backend.vercel.app/group-submission-count/${userData.user._id}`
-      )
+      .get(`http://localhost:8000/group-submission-count/${userData.user._id}`)
       .then((res) => {
         console.log(res.data);
         let data = {
@@ -49,7 +47,6 @@ const UserDashboardPage = () => {
       <Navbar />
       <StyledEngineProvider injectFirst>
         <div className="admin-page-container">
-         
           <div className="admin-page-content">
             <div className="user-dashboard-container">
               <div className="ud-block-1">

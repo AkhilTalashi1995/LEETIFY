@@ -19,7 +19,7 @@ function UserHome() {
 
   useEffect(() => {
     axios
-      .get("https://leetify-backend.vercel.app/problems")
+      .get("http://localhost:8000/problems")
       .then((res) => {
         console.log(...res.data.problemList);
         dispatch({ type: "SET_PROBLEM_LIST", payload: res.data.problemList });
