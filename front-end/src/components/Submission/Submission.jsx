@@ -23,7 +23,7 @@ const Submission = () => {
   useEffect(() => {
     axios
       .get(
-        `https://leetify-backend.vercel.app/solutions/${state.userData.user._id}/${state.selectedProblem._id}`
+        `${process.env.REACT_APP_API_URL}/solutions/${state.userData.user._id}/${state.selectedProblem._id}`
       )
       .then((res) => {
         console.log(res.data);

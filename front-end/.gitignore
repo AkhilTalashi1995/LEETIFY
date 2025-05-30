@@ -22,3 +22,11 @@ front-end/.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# misc
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

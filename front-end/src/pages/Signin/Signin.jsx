@@ -23,7 +23,7 @@ const SignIn = () => {
     setLoading(true);
     setErr("");
     axios
-      .post("https://leetify-backend.vercel.app/signin", formData)
+      .post(`${process.env.REACT_APP_API_URL}/signin`, formData)
       .then((response) => {
         dispatch({
           type: "SIGNIN_SUCCESS",

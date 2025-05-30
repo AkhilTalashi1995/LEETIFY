@@ -125,7 +125,7 @@ const UpdateProblem = () => {
       };
       axios
         .put(
-          `https://leetify-backend.vercel.app/problems/${selectedProblem._id}`,
+          `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`,
           problemData
         )
         .then((res) => {
@@ -151,7 +151,7 @@ const UpdateProblem = () => {
   const handleDelete = () => {
     axios
       .delete(
-        `https://leetify-backend.vercel.app/problems/${selectedProblem._id}`
+        `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`
       )
       .then((res) => {
         console.log(res.data);
