@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 
-// 👇 Restrict CORS to your frontend domain ONLY
+// 👇 Restrict CORS to your frontend domain ONLY //
 app.use(
   cors({
     origin: "https://leetify.vercel.app",

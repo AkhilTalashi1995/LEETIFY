@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 
-// Helpers
+// Helpers//
 function loadFromLocalStorage() {
   try {
     const serializedState = localStorage.getItem("leetify_app_state");
