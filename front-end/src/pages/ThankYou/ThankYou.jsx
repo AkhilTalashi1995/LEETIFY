@@ -1,14 +1,14 @@
 import React from "react";
 import "./Thank-you.scss";
 import { Link, NavLink } from "react-router-dom";
-import LandingPageNavbar from "../../components/LandingPageNavbar/LandingPageNavbar";
 import CommonFooter from "../../components/CommonFooter/Cfooter";
+import Navbar from "../../components/Navbar/Navbar";
 
 
 function ThankYou() {
   return (
     <>
-      <LandingPageNavbar />
+      <Navbar/>
       <div className="thank-you-container">
         <div className="thank-you-main flex">
           <div className="thank-you-content flex">

@@ -1,13 +1,13 @@
 import React from "react";
 import "./Cancel-Transaction.scss";
 import { Link, NavLink } from "react-router-dom";
-import LandingPageNavbar from "../../components/LandingPageNavbar/LandingPageNavbar";
+import Navbar from "../../components/Navbar/Navbar";
 import CommonFooter from "../../components/CommonFooter/Cfooter";
 
 function CancelTransaction() {
   return (
     <>
-      <LandingPageNavbar />
+      <Navbar />
       <div className="cancel-container">
         <div className="cancel-main flex">
           <div className="cancel-content flex">
