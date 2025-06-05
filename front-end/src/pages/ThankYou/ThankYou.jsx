@@ -36,7 +36,7 @@ function ThankYou() {
 
     if (sessionId && localStorage.jwtToken) {
       axios
-        .get(`${REACT_APP_API_URL}/me`, {
+        .get(`${process.env.REACT_APP_API_URL}/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.jwtToken}`,
           },
