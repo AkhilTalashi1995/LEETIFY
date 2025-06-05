@@ -3,7 +3,6 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
-import CommonFooter from "../../components/CommonFooter/Cfooter";
 import "./Thank-you.scss";
 
 function ThankYou() {
@@ -14,13 +13,13 @@ function ThankYou() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Helper: get session_id from URL
+  // Get session_id from Stripe Checkout redirect URL
   const getSessionId = () => {
     const params = new URLSearchParams(location.search);
     return params.get("session_id");
   };
 
-  // Helper: format date
+  // Helper: Format date
   const formatDate = (dateString) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -33,7 +32,6 @@ function ThankYou() {
 
   useEffect(() => {
     const sessionId = getSessionId();
-
     if (sessionId && localStorage.jwtToken) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/me`, {
@@ -44,12 +42,12 @@ function ThankYou() {
         .then((res) => {
           setUser(res.data.user);
           setLoading(false);
-          // ---- UPDATE REDUX so rest of the app sees the new premium status! ----
+          // Update Redux so the rest of the app sees the new premium status
           dispatch({
             type: "SIGNIN_SUCCESS",
             payload: {
               ...userData,
-              user: res.data.user, // Only update the user object, keep other fields
+              user: res.data.user,
             },
           });
         })
@@ -57,7 +55,8 @@ function ThankYou() {
     } else {
       setLoading(false);
     }
-  }, [location.search, dispatch, userData]);
+    // Only depend on location.search to avoid infinite loop!
+  }, [location.search, dispatch]);
 
   return (
     <>
