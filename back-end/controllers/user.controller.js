@@ -39,13 +39,22 @@ export const loginUser = async (req, res, next) => {
 };
 
 export const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+  const authHeader = req.headers.authorization;
+
+  // Check if Authorization header exists and starts with "Bearer "
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
   }
+
+  const token = authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized: Token missing" });
+  }
+
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
     req.userId = decoded.userId;
     next();
@@ -85,5 +94,16 @@ export const updateUser = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: err.message });
+  }
+};
+
+
+export const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ error: "Not found" });
+    res.json({ user });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 };

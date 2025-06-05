@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["USER", "PREMIUM_USER", "ADMIN"],
   },
+  subscription_end: {
+    type: Date,
+  },
   submisssions: [
     {
       submission: { type: mongoose.Schema.Types.ObjectId, ref: "Submission" },

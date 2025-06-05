@@ -18,6 +18,10 @@ const problemSchema = new mongoose.Schema({
     enum: ["Easy", "Medium", "Hard"],
     required: true,
   },
+  locked: {
+    type: Boolean,
+    default: false, // By default, problems are accessible to all
+  },
   examples: [
     {
       type: Object,

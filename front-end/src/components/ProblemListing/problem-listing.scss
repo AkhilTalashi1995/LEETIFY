@@ -190,3 +190,47 @@
     margin-bottom: 14px;
   }
 }
+
+
+.locked-blur {
+  filter: blur(0.8px) grayscale(70%);
+  opacity: 0.7;
+  background: #2c2c2c !important;
+  position: relative;
+  cursor: not-allowed;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.lock-icon {
+  color: #ffb23d;
+  font-size: 1.25rem;
+  margin-right: 10px;
+}
+
+.blurred-title {
+  filter: blur(0.3px);
+  color: #fff4c7;
+}
+
+.difficulty-badge {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: #ffe4b1;
+  color: #805200;
+  padding: 0.15em 0.7em;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+}
+
+.problem-cat.active {
+  border: 2px solid #fea116;
+  box-shadow: 0 2px 8px 0 rgba(244, 144, 38, 0.1);
+}
+
+.all {
+  background: linear-gradient(45deg, #36d1c4, #72e0d1);
+}

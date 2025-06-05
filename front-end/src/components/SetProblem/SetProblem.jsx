@@ -4,10 +4,11 @@ import {
   Button,
   FormControl,
   InputLabel,
-  Menu,
   MenuItem,
   Select,
   TextField,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { Editor } from "@monaco-editor/react";
 import { useSelector } from "react-redux";
@@ -22,37 +23,26 @@ const SetProblem = () => {
     examples: "",
     testcases: "",
     solution: "",
+    locked: false, // <---- add locked field
   });
 
   const handleFormDataChange = (event) => {
-    const { name, value } = event.target;
-    if (name.match("problemName")) {
-      setFormData({ ...formData, [name]: value });
-    } else if (name.match("problemDescription")) {
-      setFormData({ ...formData, [name]: value });
-    } else if (name.match("difficulty")) {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const [difficulty, setDifficulty] = useState("Easy");
-
-  const handleChange = (event) => {
-    setDifficulty(event.target.value);
+    const { name, value, type, checked } = event.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   const handleStarterCodeChange = (editorValue) => {
     setFormData({ ...formData, starterCode: editorValue });
   };
-
   const handleSolutionChange = (editorValue) => {
     setFormData({ ...formData, solution: editorValue });
   };
-
   const handleExamplesChange = (editorValue) => {
     setFormData({ ...formData, examples: editorValue });
   };
-
   const handleTestCasesChange = (editorValue) => {
     setFormData({ ...formData, testcases: editorValue });
   };
@@ -70,6 +60,7 @@ const SetProblem = () => {
         examples: formData.examples,
         test_cases: formData.testcases,
         solution: formData.solution,
+        locked: formData.locked, // <--- include locked
       };
       axios
         .post(`${process.env.REACT_APP_API_URL}/problems`, problemData, {
@@ -87,6 +78,7 @@ const SetProblem = () => {
             examples: "",
             testcases: "",
             solution: "",
+            locked: false,
           });
         })
         .catch((err) => {
@@ -229,6 +221,23 @@ const SetProblem = () => {
                 />
               </div>
             </div>
+            {/* --- Add Locked Checkbox here, just above the submit button --- */}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="locked"
+                  checked={formData.locked}
+                  onChange={handleFormDataChange}
+                  color="warning"
+                />
+              }
+              label={
+                <span style={{ color: "#ed932c", fontWeight: 500 }}>
+                  Locked (Premium Only)
+                </span>
+              }
+              style={{ margin: "0.6rem 0 0.8rem 0" }}
+            />
             <div className="setproblem-block-4">
               <Button variant="contained" type="submit" fullWidth>
                 Submit

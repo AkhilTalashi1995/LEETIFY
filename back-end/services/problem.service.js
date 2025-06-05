@@ -7,7 +7,8 @@ export const createProblem = async (
   difficulty,
   examples,
   test_cases,
-  solution
+  solution,
+  locked = false
 ) => {
   const existingProblem = await Problem.findOne({ title });
   if (existingProblem) {
@@ -25,16 +26,33 @@ export const createProblem = async (
     examples: JSON.parse(examples),
     test_cases: JSON.parse(test_cases),
     solution: solution,
+    locked,
   });
   await problem.save();
   return problem;
 };
 
-export const getProblems = async () => {
+export const getProblems = async (user_status) => {
   try {
-    const problemList = await Problem.find({});
-    return problemList;
+    const allProblems = await Problem.find({});
+    if (user_status === "USER") {
+      // Mask locked problems for USER
+      return allProblems.map((p) =>
+        p.locked
+          ? {
+              _id: p._id,
+              title: p.title,
+              locked: true,
+              difficulty: p.difficulty, // include this!
+            }
+          : p
+      );
+    } else {
+      // PREMIUM_USER or ADMIN: return all fields
+      return allProblems;
+    }
   } catch (error) {
     console.log(error);
+    throw error; 
   }
 };

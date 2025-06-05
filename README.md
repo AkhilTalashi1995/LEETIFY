@@ -50,6 +50,6 @@ Leetify is an online coding platform that offers a diverse collection of challen
   - `npm install` to install dependencies
   - `npm start` to start the client
 
-- Client application starts on `http://localhost:3000`
+- Client application starts on `https://leetify.vercel.app`
 
 - Server is available on `https://leetify-backend.vercel.app`

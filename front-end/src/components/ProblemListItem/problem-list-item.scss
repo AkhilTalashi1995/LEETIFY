@@ -60,3 +60,27 @@
   }
 }
 
+.locked-problem {
+  cursor: not-allowed;
+  user-select: none;
+  .problem-list-item-container {
+    position: relative;
+    filter: blur(1.5px) brightness(0.9);
+    pointer-events: none;
+    opacity: 0.7;
+    transition: filter 0.18s;
+    background: #233c47;
+  }
+  .lock-icon {
+    position: absolute;
+    left: 14px;
+    color: #f5bb4a;
+    font-size: 1.3rem;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  h3 {
+    margin-left: 2.2rem; // To make space for the lock icon
+  }
+}

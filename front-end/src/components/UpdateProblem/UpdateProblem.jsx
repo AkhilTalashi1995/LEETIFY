@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./update-problem.scss";
-import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {
   Button,
   FormControl,
   InputLabel,
-  Menu,
   MenuItem,
   Select,
   TextField,
@@ -29,7 +27,7 @@ const MenuProps = {
 const UpdateProblem = () => {
   const { problemList } = useSelector((state) => state);
   const [selectedProblem, setSelectedProblem] = useState({});
-  const [problemName, setProblemName] = React.useState("");
+  const [problemName, setProblemName] = useState("");
   const [showUpdateOptions, setShowUpdateOptions] = useState(false);
   const [showProblemEditSpace, setShowProblemEditSpace] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,33 +38,27 @@ const UpdateProblem = () => {
     examples: "",
     testcases: "",
     solution: "",
+    locked: false,
   });
 
   const handleSelectChange = (event) => {
     setProblemName(event.target.value);
-
-    let prob = problemList.filter(
+    let prob = problemList.find(
       (problem) => problem.title === event.target.value
-    )[0];
-
-    console.log("*********************", prob);
-
+    );
     setSelectedProblem(prob);
-
     setFormData({
       problemName: prob.title,
       problemDescription: prob.description,
       starterCode: prob.starter_code,
       difficulty: prob.difficulty,
-      examples: JSON.stringify(prob.examples),
-      testcases: JSON.stringify(prob.test_cases),
+      examples: JSON.stringify(prob.examples, null, 2),
+      testcases: JSON.stringify(prob.test_cases, null, 2),
       solution: prob.solution,
+      locked: !!prob.locked,
     });
-
     setShowUpdateOptions(true);
   };
-
-  console.log("ffff", formData);
 
   const handleUpdateSpace = () => {
     setShowProblemEditSpace(true);
@@ -74,42 +66,28 @@ const UpdateProblem = () => {
 
   const handleFormDataChange = (event) => {
     const { name, value } = event.target;
-    if (name.match("problemName")) {
-      setFormData({ ...formData, [name]: value });
-    } else if (name.match("problemDescription")) {
-      setFormData({ ...formData, [name]: value });
-    } else if (name.match("difficulty")) {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
-  const [difficulty, setDifficulty] = useState("Easy");
-
-  const handleChange = (event) => {
-    setDifficulty(event.target.value);
+  const handleLockedChange = (event) => {
+    setFormData({ ...formData, locked: event.target.checked });
   };
 
-  const handleStarterCodeChange = (editorValue) => {
-    setFormData({ ...formData, starterCode: editorValue });
+  const handleStarterCodeChange = (value) => {
+    setFormData({ ...formData, starterCode: value });
   };
 
-  const handleSolutionChange = (editorValue) => {
-    setFormData({ ...formData, solution: editorValue });
+  const handleSolutionChange = (value) => {
+    setFormData({ ...formData, solution: value });
   };
 
-  const handleExamplesChange = (editorValue) => {
-    setFormData({ ...formData, examples: editorValue });
+  const handleExamplesChange = (value) => {
+    setFormData({ ...formData, examples: value });
   };
 
-  const handleTestCasesChange = (editorValue) => {
-    setFormData({ ...formData, testcases: editorValue });
+  const handleTestCasesChange = (value) => {
+    setFormData({ ...formData, testcases: value });
   };
-
-  const { userData } = useSelector((state) => state.userData);
-
-  console.log("ssssss", JSON.stringify(selectedProblem.examples));
-  console.log("ssttttt", selectedProblem);
-  console.log("ssttttt", selectedProblem.starter_code);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -122,14 +100,20 @@ const UpdateProblem = () => {
         examples: formData.examples,
         test_cases: formData.testcases,
         solution: formData.solution,
+        locked: formData.locked,
       };
       axios
         .put(
           `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`,
-          problemData
+          problemData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+              "Content-Type": "application/json",
+            },
+          }
         )
         .then((res) => {
-          console.log(res.data);
           setShowProblemEditSpace(false);
           setShowUpdateOptions(false);
           setFormData({
@@ -140,6 +124,7 @@ const UpdateProblem = () => {
             examples: "",
             solution: "",
             testcases: "",
+            locked: false,
           });
         })
         .catch((err) => {
@@ -154,8 +139,6 @@ const UpdateProblem = () => {
         `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`
       )
       .then((res) => {
-        console.log(res.data);
-        console.log(res.status);
         setShowUpdateOptions(false);
         setShowProblemEditSpace(false);
       })
@@ -176,10 +159,9 @@ const UpdateProblem = () => {
               onChange={handleSelectChange}
               input={<OutlinedInput />}
               renderValue={(selected) => {
-                if (selected.length === 0) {
+                if (!selected) {
                   return <em>Select Problem</em>;
                 }
-
                 return selected;
               }}
               MenuProps={MenuProps}
@@ -195,7 +177,7 @@ const UpdateProblem = () => {
               ))}
             </Select>
           </FormControl>
-          {showUpdateOptions ? (
+          {showUpdateOptions && (
             <div className="up-cont-b3">
               <h3>Selected Problem: {problemName}</h3>
               <Button
@@ -209,10 +191,8 @@ const UpdateProblem = () => {
                 Delete
               </Button>
             </div>
-          ) : (
-            ""
           )}
-          {showProblemEditSpace ? (
+          {showProblemEditSpace && (
             <>
               <div className="up-cont-b4">
                 <div className="setproblem-container up-cont-fix2">
@@ -347,6 +327,40 @@ const UpdateProblem = () => {
                           />
                         </div>
                       </div>
+                      {/* Locked Checkbox */}
+                      <div
+                        style={{
+                          margin: "1rem 0 0.2rem 0",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          id="locked-checkbox"
+                          checked={formData.locked}
+                          onChange={handleLockedChange}
+                          style={{
+                            accentColor: "#fea116",
+                            width: 22,
+                            height: 22,
+                            marginRight: 12,
+                            cursor: "pointer",
+                          }}
+                        />
+                        <label
+                          htmlFor="locked-checkbox"
+                          style={{
+                            color: "#fea116",
+                            fontWeight: 700,
+                            cursor: "pointer",
+                            fontSize: "1.08rem",
+                            letterSpacing: "0.5px",
+                          }}
+                        >
+                          Locked (Premium Only)
+                        </label>
+                      </div>
                       <div className="setproblem-block-4">
                         <Button variant="contained" type="submit" fullWidth>
                           Submit
@@ -358,8 +372,6 @@ const UpdateProblem = () => {
                 </div>
               </div>
             </>
-          ) : (
-            ""
           )}
         </div>
       </div>

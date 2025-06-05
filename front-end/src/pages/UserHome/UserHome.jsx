@@ -3,41 +3,58 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
 import ProblemListing from "../../components/ProblemListing/ProblemListing";
 import axios from "axios";
-import Footer from "./Footer";
-import UserDetails from "../../components/UserDetails/UserDetails";
-import ProblemsSolvedByUser from "../../components/ProblemsSolvedByUser/ProblemsSolvedByUser";
 import AdminPage from "../AdminPage/AdminPage";
-import Submission from "../../components/Submission/Submission";
-import LockedProblems from "../../components/LockedProblems/LockedProblems";
-import AllUsers from "../../components/AllUsers/AllUsers";
-import CommonFooter from "../../components/CommonFooter/Cfooter";
+// import other components as needed...
 
 function UserHome() {
   const state = useSelector((state) => state);
-  console.log(state);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // 1. Try Redux state first
+    let token = state.userData?.token;
+
+    // 2. Fallback: if Redux state is empty, check localStorage
+    if (!token) {
+      const persisted = localStorage.getItem("leetify_app_state");
+      try {
+        token = persisted ? JSON.parse(persisted)?.userData?.token : null;
+      } catch (e) {
+        token = null;
+      }
+    }
+
+    // 3. If still no token, don't proceed
+    if (!token) {
+      console.error("No JWT token found. User is not authenticated.");
+      return;
+    }
+
     axios
-      .get(`${process.env.REACT_APP_API_URL}/problems`)
+      .get(`${process.env.REACT_APP_API_URL}/problems`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
-        console.log(...res.data.problemList);
         dispatch({ type: "SET_PROBLEM_LIST", payload: res.data.problemList });
         dispatch({ type: "RESET_SUBMISSION_STATUS" });
       })
-      .catch((error) => console.error(error));
-  }, []);
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [dispatch, state.userData?.token]);
 
-  console.log(state);
-
+  // If user is admin, show admin page; else, show user content
   return (
     <>
-      {state.userData.user.user_status === "ADMIN" ? (
+      {state.userData.user?.user_status === "ADMIN" ? (
         <AdminPage />
       ) : (
         <>
           <Navbar />
           <ProblemListing />
+
           {/* <UserDetails /> */}
           {/* <AllUsers/> */}
           {/* <ProblemsSolvedByUser/> */}

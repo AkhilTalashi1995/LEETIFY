@@ -76,3 +76,39 @@
     p { font-size: 1rem; max-width: 95vw; }
   }
 }
+
+
+.subscription-info-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #fff7ca 0%, #ffe4b8 100%);
+  color: #b38708;
+  font-weight: 600;
+  font-size: 1.03rem;
+  padding: 8px 16px 8px 12px;
+  margin: 0 0 18px 0;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px 0 rgba(252,197,60,0.08);
+  border: 1px solid #ffe5a8;
+  letter-spacing: 0.01em;
+
+  .sub-crown {
+    font-size: 1.3em;
+    margin-right: 2px;
+    filter: drop-shadow(0 1px 1px #fff8);
+  }
+  .subscription-end-date {
+    font-weight: 700;
+    color: #b38708;
+    text-shadow: 0 1px 0 #fff7;
+  }
+}
+
+@media (max-width: 600px) {
+  .subscription-info-badge {
+    font-size: 0.97rem;
+    padding: 7px 10px 7px 10px;
+    border-radius: 12px;
+  }
+}

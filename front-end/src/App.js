@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { useState } from "react";
-
 import axios from "axios";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
@@ -22,66 +21,91 @@ import ThankYou from "./pages/ThankYou/ThankYou";
 import CancelTransaction from "./pages/CancelTransaction/CancelTransaction";
 import UserDashboardPage from "./pages/UserDashboardPage/UserDashboardPage";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
+import PublicRoute from "./components/PublicRoute/PublicRoute"; // adjust path as needed
+
+
+// 1. Stripe imports
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+// 2. Your Stripe *publishable* key (get this from Stripe dashboard, NOT secret key)
+const stripePromise = loadStripe(
+  "pk_test_51RWNZAP4z3fJb21p1hmLTaRCj8hHHW2sCD3NWWGxTrYPFCPy8iuczileMbq1P1qvq9b48DZ0SBwjWs5hODfx9WnE00OPqgftUd"
+); // <-- replace with your key
 
 function App() {
   const state = useSelector((state) => state);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/premiumpage" element={<Premium />} />
+    // 3. Wrap your app (or only payment routes) with <Elements>
+    <Elements stripe={stripePromise}>
+      <BrowserRouter>
+        <Routes>
+          {/* Public pages */}
+          <Route path="/" element={<PublicRoute element={<Home />} />} />
+          <Route
+            path="/signin"
+            element={<PublicRoute element={<Signin />} />}
+          />
+          <Route
+            path="/signup"
+            element={<PublicRoute element={<Signup />} />}
+          />
+          <Route
+            path="/premiumpage"
+            element={<PublicRoute element={<Premium />} />}
+          />
+          
+          {/* Protected pages */}
 
-        <Route
-          path="/home"
-          element={<ProtectedRoute element={<UserHome />} />}
-        />
+          <Route
+            path="/home"
+            element={<ProtectedRoute element={<UserHome />} />}
+          />
+          <Route
+            path="/userprofile"
+            element={<ProtectedRoute element={<UserProfile />} />}
+          />
+          <Route
+            path="/innerpremiumpage"
+            element={<ProtectedRoute element={<InnerPremiumPage />} />}
+          />
+          <Route
+            path="/userDashboard"
+            element={<ProtectedRoute element={<UserDashboardPage />} />}
+          />
+          <Route
+            path="/problems/:problemName"
+            element={<ProtectedRoute element={<ProblemPage />} />}
+          />
 
-        <Route
-          path="/userprofile"
-          element={<ProtectedRoute element={<UserProfile />} />}
-        />
-        <Route
-          path="/innerpremiumpage"
-          element={<ProtectedRoute element={<InnerPremiumPage />} />}
-        />
-        <Route
-          path="/userDashboard"
-          element={<ProtectedRoute element={<UserDashboardPage />} />}
-        />
-        <Route
-          path="/problems/:problemName"
-          element={<ProtectedRoute element={<ProblemPage />} />}
-        />
+          <Route
+            path="/monthlysubscription"
+            element={<ProtectedRoute element={<MonthlySubscription />} />}
+          />
 
-        <Route
-          path="/monthlysubscription"
-          element={<ProtectedRoute element={<MonthlySubscription />} />}
-        />
+          <Route
+            path="/yearlysubscription"
+            element={<ProtectedRoute element={<YearlySubscription />} />}
+          />
 
-        <Route
-          path="/yearlysubscription"
-          element={<ProtectedRoute element={<YearlySubscription />} />}
-        />
+          <Route
+            path="/thankyou"
+            element={<ProtectedRoute element={<ThankYou />} />}
+          />
 
-        <Route
-          path="/thankyou"
-          element={<ProtectedRoute element={<ThankYou />} />}
-        />
+          <Route
+            path="/canceltransaction"
+            element={<ProtectedRoute element={<CancelTransaction />} />}
+          />
 
-        <Route
-          path="/canceltransaction"
-          element={<ProtectedRoute element={<CancelTransaction />} />}
-        />
-
-        <Route
-          path="/comingsoon"
-          element={<ProtectedRoute element={<ComingSoon />} />}
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/comingsoon"
+            element={<ProtectedRoute element={<ComingSoon />} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </Elements>
   );
 }
 

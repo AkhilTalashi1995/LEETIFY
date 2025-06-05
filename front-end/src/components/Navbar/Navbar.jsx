@@ -18,11 +18,9 @@ function Navbar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  // For mobile drawer
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Avatar menu (desktop only)
+  // Avatar menu
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
@@ -45,6 +43,17 @@ function Navbar() {
     setMobileOpen(false);
   };
 
+  // Modern badge JSX
+  const PremiumBadge = () =>
+    userData?.user?.user_status === "PREMIUM_USER" ? (
+      <span className="modern-premium-badge">
+        <span role="img" aria-label="crown" className="premium-crown">
+          👑
+        </span>
+        <span className="premium-text">Premium</span>
+      </span>
+    ) : null;
+
   return (
     <header className="header-section">
       <div className="header-nav">
@@ -52,13 +61,17 @@ function Navbar() {
           <img src="/logo-main.png" alt="leetify-logo" width="45" height="45" />
           <span className="brand-name">Leetify</span>
         </Link>
+
+        {/* Desktop nav */}
         <nav className="nav-links desktop-nav">
           {NAV_LINKS.map((nav, i) => (
             <Link to={nav.path} key={i}>
               <span className={nav.className}>{nav.label}</span>
             </Link>
           ))}
-          <div>
+          {/* Show premium badge beside avatar */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <PremiumBadge />
             <Button
               id="avatar-menu-btn"
               aria-controls={open ? "avatar-menu" : undefined}
@@ -71,22 +84,22 @@ function Navbar() {
                 {userData?.username?.[0]?.toUpperCase() || "U"}
               </Avatar>
             </Button>
-            <Menu
-              id="avatar-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "avatar-menu-btn",
-              }}
-            >
-              <MenuItem onClick={handleProfile}>Profile</MenuItem>
-              <MenuItem onClick={handleDashboard}>Dashboard</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
           </div>
+          <Menu
+            id="avatar-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "avatar-menu-btn",
+            }}
+          >
+            <MenuItem onClick={handleProfile}>Profile</MenuItem>
+            <MenuItem onClick={handleDashboard}>Dashboard</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
         </nav>
-        {/* Hamburger menu for mobile */}
+        {/* Hamburger for mobile */}
         {!mobileOpen && (
           <button
             className="nav-hamburger"
@@ -99,7 +112,7 @@ function Navbar() {
           </button>
         )}
       </div>
-      {/* Mobile overlay + drawer */}
+      {/* Mobile Nav Drawer */}
       <div
         className={`mobile-nav-overlay ${mobileOpen ? "open" : ""}`}
         onClick={() => setMobileOpen(false)}
@@ -116,6 +129,10 @@ function Navbar() {
           <img src="/logo-main.png" alt="leetify-logo" width={40} height={40} />
           <span className="brand-name">Leetify</span>
         </div>
+        {/* Modern premium badge in mobile nav */}
+        <div className="mobile-premium-badge-wrapper">
+          <PremiumBadge />
+        </div>
         <div className="mobile-nav-links">
           {NAV_LINKS.map((nav, i) => (
             <Link
@@ -127,7 +144,6 @@ function Navbar() {
               <span className={nav.className}>{nav.label}</span>
             </Link>
           ))}
-          {/* Profile, Dashboard, Logout as plain buttons */}
           <button className="mobile-menu-btn" onClick={handleProfile}>
             Profile
           </button>

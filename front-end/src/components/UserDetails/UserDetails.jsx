@@ -7,7 +7,17 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-// User details page, modern and responsive, with original save/update logic
+// Helper to format date
+const formatDate = (dateString) => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 function UserDetails() {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
@@ -18,6 +28,10 @@ function UserDetails() {
   const [email, setEmail] = useState(userData?.user?.email || "");
   const [password, setPassword] = useState("");
   const [saving, setSaving] = useState(false);
+
+  // Subscription end date logic
+  const isPremium = userData?.user?.user_status === "PREMIUM_USER";
+  const subscriptionEnd = userData?.user?.subscription_end;
 
   const handleSave = () => {
     setSaving(true);
@@ -48,10 +62,10 @@ function UserDetails() {
         <p>
           Manage your info, privacy, and security to make Leetify work better
           for you.
-        </p>{" "}
-        <br></br>
-        <br></br>
-        <br></br>
+        </p>
+        <br />
+        <br />
+        <br />
       </div>
       <div className="userdetails-card">
         <Avatar
@@ -70,6 +84,22 @@ function UserDetails() {
         <p className="userdetails-form-desc">
           Use the form below to edit your personal info.
         </p>
+
+        {/* --- Show subscription details if premium --- */}
+        {isPremium && subscriptionEnd && (
+          <div className="subscription-info-badge">
+            <span role="img" aria-label="crown" className="sub-crown">
+              👑
+            </span>
+            <span>
+              <strong>Premium</strong> — active until{" "}
+              <span className="subscription-end-date">
+                {formatDate(subscriptionEnd)}
+              </span>
+            </span>
+          </div>
+        )}
+
         <form
           className="userdetails-form"
           onSubmit={(e) => {
@@ -77,6 +107,7 @@ function UserDetails() {
             handleSave();
           }}
         >
+          {/* ... rest of form unchanged ... */}
           <TextField
             label="First Name"
             name="firstname"

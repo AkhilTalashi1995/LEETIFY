@@ -260,3 +260,54 @@
     margin-left: 8px;
   }
 }
+
+
+
+.modern-premium-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(90deg, #fff6c3 0%, #ffe5b4 100%);
+  color: #bb8a07;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 6px 18px 6px 10px;
+  margin-left: 10px;
+  border-radius: 22px;
+  box-shadow: 0 2px 8px 0 rgba(252,197,60,0.10);
+  border: 1px solid #ffe69e;
+  letter-spacing: 0.01em;
+  transition: background 0.13s;
+  user-select: none;
+  gap: 8px;
+
+  .premium-crown {
+    font-size: 1.2em;
+    margin-right: 2px;
+    line-height: 1;
+    vertical-align: middle;
+    filter: drop-shadow(0 1px 1px #fff8);
+  }
+  .premium-text {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 0 #fff8;
+  }
+}
+
+/* Responsive: slightly smaller badge and move below brand on mobile */
+@media (max-width: 900px) {
+  .modern-premium-badge {
+    font-size: 0.98rem;
+    padding: 5px 15px 5px 8px;
+    margin: 0 auto 8px auto;
+    border-radius: 16px;
+  }
+  .mobile-premium-badge-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+
