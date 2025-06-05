@@ -30,8 +30,8 @@ import { loadStripe } from "@stripe/stripe-js";
 
 // 2. Your Stripe *publishable* key (get this from Stripe dashboard, NOT secret key)
 const stripePromise = loadStripe(
-  "pk_test_51RWNZAP4z3fJb21p1hmLTaRCj8hHHW2sCD3NWWGxTrYPFCPy8iuczileMbq1P1qvq9b48DZ0SBwjWs5hODfx9WnE00OPqgftUd"
-); // <-- replace with your key
+  "pk_live_51RWNYy03QVaE1lftfZffYPjg7a6ZD4TxBq5ronyg7bdvWPh17tnr7iUFTymikmBPMqn88m6X9GtVHPBUmeFv0yLc000sauL3Ak"
+);
 
 function App() {
   const state = useSelector((state) => state);
