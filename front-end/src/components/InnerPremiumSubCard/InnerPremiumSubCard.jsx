@@ -3,8 +3,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import "./Inner-Premium-Sub-Card.scss"; // Make sure this path is correct
 
-const YEARLY_PRICE_ID = "price_1RWnLg03QVaE1lft83DSigXk";
-const MONTHLY_PRICE_ID = "price_1RWnLH03QVaE1lftE0xCBiTs";
+const YEARLY_PRICE_ID = "price_1RWnzo03QVaE1lftYrV9ZMHZ";
+const MONTHLY_PRICE_ID = "price_1RWnzX03QVaE1lftUobIfe3M";
 
 function InnerPremiumSubCard() {
   const user = useSelector((state) => state.userData?.user);
