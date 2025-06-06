@@ -5,7 +5,7 @@
 
 .first-fold {
   display: flex;
-  flex-direction: column; // Image first, then content on mobile
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 50px 20px;
@@ -14,7 +14,7 @@
   color: white;
 
   @media (min-width: 768px) {
-    flex-direction: row; // Side by side on desktop
+    flex-direction: row;
     text-align: left;
     padding: 100px 50px;
     align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .first-fold-img2 {
-  position: static; // Remove absolute for mobile
+  position: static;
   max-width: 300px;
   margin: 20px 0 0 0;
   z-index: 1;
@@ -62,23 +62,81 @@
     opacity: 0.8;
     line-height: 1.6;
   }
+}
 
-  .first-fold-content-button {
-    margin-top: 30px;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    font-size: 16px;
-    background-color: #42bd9f;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
+.first-fold-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 30px;
+  align-items: center;
 
-    &:hover {
-      background-color: #2d9d81;
-    }
+  @media (min-width: 450px) {
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
   }
 }
+
+.first-fold-btns a {
+  text-decoration: none !important;
+  display: flex;
+}
+
+.first-fold-content-button {
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 16px;
+  background-color: #42bd9f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #2d9d81;
+  }
+}
+.first-fold-content-button,
+.first-fold-demo-button {
+  width: auto;
+  min-width: 170px; // Optional: sets a nice minimum, matches look
+  max-width: 100%;
+  align-self: center; // ensures they're centered in the column layout
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.first-fold-demo-button {
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 16px;
+  background-color: #ff0000; // YouTube red
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+
+  &:hover, &:focus {
+    background-color: #c00; // darker YouTube red on hover
+    color: #fff;
+    outline: none;
+  }
+}
+
+.youtube-icon {
+  display: flex;
+  align-items: center;
+}
+
+
 
 .usp {
   padding: 60px 20px;
@@ -108,7 +166,7 @@
     @media (min-width: 768px) {
       flex-direction: row;
       justify-content: center;
-      align-items: stretch; // Ensures all cards have equal height
+      align-items: stretch;
     }
   }
 
@@ -120,13 +178,11 @@
     max-width: 300px;
     box-shadow: 5.5px 11px 11px hsl(0deg 0% 0% / 0.33);
     text-align: left;
-
-    // Flex makes all cards the same height in a row
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex: 1 1 0px;
-    min-height: 290px; // Adjust this if you want taller/shorter cards
+    min-height: 290px;
 
     h1 {
       font-size: 24px;
@@ -138,7 +194,7 @@
       font-size: 16px;
       font-weight: 400;
       color: black;
-      margin-top: auto; // Keeps p at the bottom if you add elements above
+      margin-top: auto;
     }
   }
 }
@@ -177,7 +233,6 @@
   }
 }
 
-
 .section-icon {
   width: 64px;
   height: 64px;
@@ -189,5 +244,82 @@
     width: 48px;
     height: 48px;
     margin-bottom: 14px;
+  }
+}
+
+/* ---- Demo Modal Styling ---- */
+.demo-modal-overlay {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  background: rgba(14, 21, 34, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInModal 0.2s;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.demo-modal-content {
+  background: #fff;
+  border-radius: 18px;
+  max-width: 90vw;
+  width: 480px;
+  box-shadow: 0 8px 40px rgba(12, 16, 32, 0.25);
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: popInModal 0.23s;
+}
+
+@keyframes popInModal {
+  from { transform: scale(0.93); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.demo-modal-close {
+  background: none;
+  border: none;
+  font-size: 2.1rem;
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  cursor: pointer;
+  color: #2d9d81;
+  font-weight: bold;
+  z-index: 2;
+
+  &:hover {
+    color: #1a7862;
+  }
+}
+
+.demo-modal-video-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .demo-modal-content {
+    width: 98vw;
+    max-width: 98vw;
+    min-width: unset;
+    border-radius: 12px;
   }
 }

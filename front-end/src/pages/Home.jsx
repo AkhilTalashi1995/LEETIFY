@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./home.scss";
 import { Link } from "react-router-dom";
 import Footer from "./UserHome/Footer";
 import LandingPageNavbar from "../components/LandingPageNavbar/LandingPageNavbar";
 import CustomerReviews from "../components/CustomerReviews/CustomerReviews";
 
+// Demo Modal Component
+function DemoModal({ open, onClose }) {
+  if (!open) return null;
+
+  return (
+    <div className="demo-modal-overlay" onClick={onClose}>
+      <div className="demo-modal-content" onClick={(e) => e.stopPropagation()}>
+        <button
+          className="demo-modal-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div className="demo-modal-video-container">
+          <iframe
+            src="https://www.youtube.com/embed/2YP86XvqiwE?autoplay=1"
+            title="Project Walkthrough"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("demoVideoShown")) {
+      setTimeout(() => setModalOpen(true), 700); // slight delay for UX
+      sessionStorage.setItem("demoVideoShown", "1");
+    }
+  }, []);
+
   return (
     <>
       <LandingPageNavbar />
@@ -21,11 +58,26 @@ function Home() {
             Leetify is the best platform to help you enhance your skills, expand
             your knowledge and prepare for technical interviews.
           </p>
-          <Link to="/signup">
-            <button className="first-fold-content-button">
-              Create Account
+          <div className="first-fold-btns">
+            <Link to="/signup">
+              <button className="first-fold-content-button">
+                Create Account
+              </button>
+            </Link>
+            <button
+              className="first-fold-demo-button"
+              onClick={() => setModalOpen(true)}
+            >
+              <span className="youtube-icon" aria-label="YouTube">
+                {/* YouTube Play SVG */}
+                <svg height="20" viewBox="0 0 48 48" width="20">
+                  <circle cx="24" cy="24" r="23" fill="#FF0000" />
+                  <polygon points="20,16 36,24 20,32" fill="#fff" />
+                </svg>
+              </span>
+              Project Demo
             </button>
-          </Link>
+          </div>
         </div>
       </div>
 
@@ -97,6 +149,9 @@ function Home() {
 
       <CustomerReviews />
       <Footer />
+
+      {/* Demo Modal */}
+      <DemoModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }

@@ -88,7 +88,7 @@ const SignIn = () => {
         {/* Demo credentials for recruiters */}
         <div className="auth-demo">
           <div>
-            <strong>Demo Admin login:</strong>
+            <strong>Admin login:</strong>
             <div>
               <span>Email:</span>{" "}
               <span className="auth-demo-email">admin@gmail.com</span>
@@ -98,8 +98,19 @@ const SignIn = () => {
               <span className="auth-demo-pass">pass</span>
             </div>
           </div>
-          <div style={{ marginTop: 16 }}>
-            <strong>Demo user login:</strong>
+          <div style={{ marginTop: 10 }}>
+            <strong>Non Premium user login:</strong>
+            <div>
+              <span>Email:</span>{" "}
+              <span className="auth-demo-email">nonprem@gmail.com</span>
+            </div>
+            <div>
+              <span>Password:</span>{" "}
+              <span className="auth-demo-pass">test</span>
+            </div>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            <strong>Premium user login:</strong>
             <div>
               <span>Email:</span>{" "}
               <span className="auth-demo-email">test@gmail.com</span>
