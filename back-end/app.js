@@ -20,7 +20,8 @@ app.use(
 );
 
 // ********** STRIPE WEBHOOK ROUTE (must be FIRST, before express.json) **********
-app.post("/stripe-webhook",
+app.post(
+  "/stripe-webhook",
   express.raw({ type: "application/json" }),
   async (req, res) => {
     let event;

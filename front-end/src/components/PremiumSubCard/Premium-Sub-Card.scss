@@ -120,9 +120,17 @@
     }
   }
   
+
+
   /* Hide most-popular on monthly */
   .sub-card.monthly .most-popular-badge {
     display: none;
+  }
+
+  .sub-card.monthly {
+    background: linear-gradient(135deg, #ddebfd 0%, #d2e3fa 100%);
+    box-shadow: 0 6px 28px 0 rgba(68, 124, 188, 0.13);
+    position: relative;
   }
   
   /* Responsive Styles */
