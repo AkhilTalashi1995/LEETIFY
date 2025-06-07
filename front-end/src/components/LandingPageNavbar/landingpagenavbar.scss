@@ -128,7 +128,7 @@
   box-shadow: -2px 0 18px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center; // center content horizontally
+  align-items: center;
   padding: 32px 32px 0 22px;
   gap: 36px;
   z-index: 200;
@@ -153,7 +153,7 @@
   .mobile-brand-logo {
     display: flex;
     align-items: center;
-    justify-content: center; // center logo and brand
+    justify-content: center;
     gap: 12px;
     margin-top: 12px;
     margin-bottom: 18px;
@@ -175,31 +175,58 @@
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 10px;
     width: 100%;
-    align-items: center; // center the links
-    a,
-    .premium {
-      color: #fff;
-      font-size: 1.1rem;
-      text-decoration: none;
-      font-weight: 500;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+    align-items: center;
 
-      span {
-        color: inherit;
-        background: none;
-        padding: 0;
-      }
-      .premium {
+    .mobile-nav-link {
+      color: #fff;
+      text-decoration: none !important;
+      font-weight: 500;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      margin-bottom: 6px;
+      background: none;
+      transition: background 0.16s, color 0.16s;
+
+      &:hover,
+      &:focus {
+        background: rgba(255,255,255,0.13);
         color: #fea116;
-        text-shadow: none;
+        text-decoration: none;
       }
     }
-    a:active,
-    a:focus,
-    .premium:active {
-      color: #fea116;
+
+    .mobile-nav-link.active-link {
+      background: #fea116 !important;     // Solid orange pill
+      color: #203a43 !important;          // Dark text
+      font-weight: 700;
+      border-radius: 12px;
+      border: none !important;
+      box-shadow: 0 2px 12px 0 rgba(254,161,22,0.10);
+    }
+
+    .mobile-nav-link,
+    .mobile-nav-link:active,
+    .mobile-nav-link:focus,
+    .mobile-nav-link:visited {
+      text-decoration: none !important;
+    }
+
+    .premium {
+      color: #fea116 !important;
+      background: none !important;
+      font-weight: 600;
+      border: none !important;
+    }
+    .mobile-nav-link.active-link .premium {
+      color: #203a43 !important;
+      background: transparent !important;
+      border: none !important;
     }
   }
 }

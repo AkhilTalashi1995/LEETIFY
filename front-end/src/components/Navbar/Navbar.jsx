@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./navbar.scss";
 import Avatar from "@mui/material/Avatar";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,15 +16,14 @@ function Navbar() {
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Avatar menu
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  // Logout etc.
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("jwtToken");
@@ -43,7 +42,6 @@ function Navbar() {
     setMobileOpen(false);
   };
 
-  // Modern badge JSX
   const PremiumBadge = () =>
     userData?.user?.user_status === "PREMIUM_USER" ? (
       <span className="modern-premium-badge">
@@ -69,7 +67,6 @@ function Navbar() {
               <span className={nav.className}>{nav.label}</span>
             </Link>
           ))}
-          {/* Show premium badge beside avatar */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <PremiumBadge />
             <Button
@@ -81,7 +78,7 @@ function Navbar() {
               className="avatar-btn"
             >
               <Avatar className="avatar">
-                {userData?.username?.[0]?.toUpperCase() || "U"}
+                {userData?.user?.firstname?.[0]?.toUpperCase() || "U"}
               </Avatar>
             </Button>
           </div>
@@ -129,28 +126,49 @@ function Navbar() {
           <img src="/logo-main.png" alt="leetify-logo" width={40} height={40} />
           <span className="brand-name">Leetify</span>
         </div>
-        {/* Modern premium badge in mobile nav */}
         <div className="mobile-premium-badge-wrapper">
           <PremiumBadge />
         </div>
         <div className="mobile-nav-links">
           {NAV_LINKS.map((nav, i) => (
-            <Link
+            <NavLink
               to={nav.path}
               key={i}
-              className={nav.className}
+              className={({ isActive }) =>
+                `${nav.className || ""} mobile-nav-link${
+                  isActive ? " active-link" : ""
+                }`
+              }
               onClick={() => setMobileOpen(false)}
             >
-              <span className={nav.className}>{nav.label}</span>
-            </Link>
+              <span className={nav.className || ""}>{nav.label}</span>
+            </NavLink>
           ))}
-          <button className="mobile-menu-btn" onClick={handleProfile}>
+          <button
+            className={
+              `mobile-menu-btn` +
+              (location.pathname === "/userprofile" ? " active-link" : "")
+            }
+            onClick={handleProfile}
+          >
             Profile
           </button>
-          <button className="mobile-menu-btn" onClick={handleDashboard}>
+          <button
+            className={
+              `mobile-menu-btn` +
+              (location.pathname === "/userDashboard" ? " active-link" : "")
+            }
+            onClick={handleDashboard}
+          >
             Dashboard
           </button>
-          <button className="mobile-menu-btn" onClick={handleLogout}>
+        </div>
+        {/* Logout at the bottom */}
+        <div className="mobile-logout-btn-wrapper">
+          <button
+            className="mobile-menu-btn logout-btn active-link"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </div>

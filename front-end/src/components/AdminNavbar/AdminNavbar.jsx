@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Dashboard", key: "dashboard" },
   { label: "Set Problem", key: "setProblem" },
   { label: "Update Problem", key: "updateProblem" },
-  { label: "All Users", key: "allUsers" }, 
+  { label: "All Users", key: "allUsers" },
 ];
 
 const AdminNavbar = ({ activeTab, onTabClick }) => {
@@ -123,11 +123,12 @@ const AdminNavbar = ({ activeTab, onTabClick }) => {
               {nav.label}
             </button>
           ))}
-          <div className="admin-mobile-avatar-menu">
-            <button onClick={handleLogout} className="admin-mobile-logout-btn">
-              Logout
-            </button>
-          </div>
+        </div>
+        {/* Logout at the bottom */}
+        <div className="admin-mobile-logout-btn-wrapper">
+          <button onClick={handleLogout} className="admin-mobile-logout-btn">
+            Logout
+          </button>
         </div>
       </nav>
     </header>

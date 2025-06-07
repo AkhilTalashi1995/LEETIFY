@@ -36,7 +36,7 @@ function LandingPageNavbar() {
           )}
         </nav>
 
-        {/* Hamburger menu for mobile - shown only when mobileOpen is false */}
+        {/* Hamburger menu for mobile */}
         {!mobileOpen && (
           <button
             className="nav-hamburger"
@@ -68,27 +68,20 @@ function LandingPageNavbar() {
           <span className="brand-name">Leetify</span>
         </div>
         <div className="mobile-nav-links">
-          {NAV_LINKS.map((nav, i) =>
-            nav.path.startsWith("/signup") ? (
-              <NavLink
-                to={nav.path}
-                key={i}
-                className={nav.className}
-                onClick={closeMenu}
-              >
-                <span className={nav.className}>{nav.label}</span>
-              </NavLink>
-            ) : (
-              <a
-                href={nav.path}
-                key={i}
-                className={nav.className}
-                onClick={closeMenu}
-              >
-                <span className={nav.className}>{nav.label}</span>
-              </a>
-            )
-          )}
+          {NAV_LINKS.map((nav, i) => (
+            <NavLink
+              to={nav.path}
+              key={i}
+              className={({ isActive }) =>
+                `${nav.className || ""} mobile-nav-link${
+                  isActive ? " active-link" : ""
+                }`
+              }
+              onClick={closeMenu}
+            >
+              <span className={nav.className || ""}>{nav.label}</span>
+            </NavLink>
+          ))}
         </div>
       </nav>
     </header>

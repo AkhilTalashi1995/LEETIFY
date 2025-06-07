@@ -136,7 +136,7 @@
   box-shadow: -2px 0 18px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center; // center content horizontally
+  align-items: center;
   padding: 32px 32px 0 22px;
   gap: 36px;
   z-index: 200;
@@ -180,38 +180,71 @@
     }
   }
 
+  .mobile-premium-badge-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
     gap: 18px;
     width: 100%;
-    align-items: center; // center the links
+    align-items: center;
 
-    a,
-    .premium {
+    .mobile-nav-link {
       color: #fff;
-      font-size: 1.1rem;
-      text-decoration: none;
+      text-decoration: none !important;
       font-weight: 500;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+      font-size: 1.1rem;
+      border-radius: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      margin-bottom: 6px;
+      background: none;
+      transition: background 0.16s, color 0.16s;
 
-      span {
-        color: inherit;
-        background: none;
-        padding: 0;
-      }
-      .premium {
+      &:hover,
+      &:focus {
+        background: rgba(255,255,255,0.13);
         color: #fea116;
-        text-shadow: none;
+        text-decoration: none;
       }
     }
-    a:active,
-    a:focus,
-    .premium:active {
-      color: #fea116;
+
+    .mobile-nav-link.active-link,
+    .mobile-menu-btn.active-link {
+      background: #fea116 !important;
+      color: #203a43 !important;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none !important;
+      box-shadow: 0 2px 12px 0 rgba(254,161,22,0.10);
     }
 
-    /* Mobile menu buttons (Profile, Dashboard, Logout) */
+    .mobile-nav-link,
+    .mobile-nav-link:active,
+    .mobile-nav-link:focus,
+    .mobile-nav-link:visited {
+      text-decoration: none !important;
+    }
+
+    .premium {
+      color: #fea116 !important;
+      background: none !important;
+      font-weight: 600;
+      border: none !important;
+    }
+    .mobile-nav-link.active-link .premium {
+      color: #203a43 !important;
+      background: transparent !important;
+      border: none !important;
+    }
+
     .mobile-menu-btn {
       background: none;
       border: none;
@@ -234,6 +267,42 @@
       }
     }
   }
+}
+
+/* Logout at the bottom of mobile nav */
+.mobile-logout-btn-wrapper {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 20px 0 28px 0;
+  display: flex;
+  justify-content: center;
+  // background: linear-gradient(to top, rgba(32,58,67,0.96) 82%, transparent 100%);
+  z-index: 201;
+}
+
+/* Style for logout button (mobile only) */
+.logout-btn {
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  min-width: 140px;
+  padding: 12px 0 !important;
+  background: #fea116 !important;
+  color: #203a43 !important;
+  box-shadow: 0 2px 18px 0 rgba(254,161,22,0.13);
+  transition: filter 0.18s, background 0.15s;
+  border: none !important;
+  outline: none;
+}
+.logout-btn:active,
+.logout-btn:focus,
+.logout-btn:hover {
+  filter: brightness(0.98);
+  background: #fec051 !important;
+  color: #203a43 !important;
 }
 
 /* Hide desktop nav and show mobile hamburger below 900px */
@@ -260,8 +329,6 @@
     margin-left: 8px;
   }
 }
-
-
 
 .modern-premium-badge {
   display: inline-flex;
@@ -295,7 +362,6 @@
   }
 }
 
-/* Responsive: slightly smaller badge and move below brand on mobile */
 @media (max-width: 900px) {
   .modern-premium-badge {
     font-size: 0.98rem;
@@ -303,11 +369,4 @@
     margin: 0 auto 8px auto;
     border-radius: 16px;
   }
-  .mobile-premium-badge-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
 }
-
