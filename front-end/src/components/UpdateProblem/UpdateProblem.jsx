@@ -152,8 +152,9 @@ const UpdateProblem = () => {
       <div className="up-cont">
         <div className="up-cont-b1">
           <h3>Update Problem</h3>
-          <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+          <FormControl sx={{ m: 1, minWidth: 250, mt: 3 }}>
             <Select
+              className="select-problem-dropdown"
               displayEmpty
               value={problemName}
               onChange={handleSelectChange}
@@ -164,7 +165,15 @@ const UpdateProblem = () => {
                 }
                 return selected;
               }}
-              MenuProps={MenuProps}
+              MenuProps={{
+                PaperProps: {
+                  className: "select-problem-dropdown-menu",
+                  style: {
+                    maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                    // DO NOT SET WIDTH HERE!
+                  },
+                },
+              }}
               inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem disabled value="">
@@ -177,6 +186,7 @@ const UpdateProblem = () => {
               ))}
             </Select>
           </FormControl>
+
           {showUpdateOptions && (
             <div className="up-cont-b3">
               <h3>Selected Problem: {problemName}</h3>

@@ -205,3 +205,56 @@
 .increase-bottom-padding {
   height: 5rem;
 }
+
+// // Make the dropdown menu auto-width and never cut content
+// .select-problem-dropdown-menu {
+//   min-width: max-content !important;
+//   width: auto !important;
+//   max-width: 90vw !important;
+//   box-shadow: 0 4px 18px rgba(33, 71, 56, 0.14);
+//   border-radius: 12px !important;
+//   padding-right: 0.7rem !important;
+//   padding-left: 0.7rem !important;
+// }
+
+// // Make sure menu items don't wrap (show full text in a single line)
+// .select-problem-dropdown-menu .MuiMenuItem-root {
+//   white-space: nowrap !important;
+//   padding-right: 1.2rem;
+//   padding-left: 1.2rem;
+//   font-size: 1.02rem;
+// }
+
+.select-problem-dropdown-menu {
+  min-width: max-content !important;
+  width: auto !important;
+  max-width: 90vw !important;
+  box-shadow: 0 4px 18px rgba(33, 71, 56, 0.14);
+  border-radius: 12px !important;
+  padding-right: 0.7rem !important;
+  padding-left: 0.7rem !important;
+
+  @media (max-width: 600px) {
+    min-width: 0 !important;
+    width: 98vw !important;   // Fill nearly the viewport width
+    max-width: 98vw !important;
+  }
+}
+
+.select-problem-dropdown-menu .MuiMenuItem-root {
+  white-space: nowrap !important;
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+  font-size: 1.02rem;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 90vw;
+
+  @media (max-width: 600px) {
+    max-width: 90vw;
+    width: 90vw;
+    display: block;
+  }
+}
+
+
