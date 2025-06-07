@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: "Dashboard", key: "dashboard" },
   { label: "Set Problem", key: "setProblem" },
   { label: "Update Problem", key: "updateProblem" },
+  { label: "All Users", key: "allUsers" }, 
 ];
 
 const AdminNavbar = ({ activeTab, onTabClick }) => {

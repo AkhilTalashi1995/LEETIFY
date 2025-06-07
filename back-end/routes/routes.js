@@ -5,10 +5,9 @@ import * as problemController from "../controllers/problem.controller.js";
 import * as solutionController from "../controllers/solution.controller.js";
 import * as submissionController from "../controllers/submission.controller.js";
 import User from "../models/user/user.js";
+import { verifyToken, requireAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
-
-// Stripe setup
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Healthcheck
@@ -19,38 +18,34 @@ router.get("/healthcheck", (req, res) => {
 // User Auth & Profile
 router.post("/signup", userController.createUser);
 router.post("/signin", userController.loginUser);
-router.put("/users/:id", userController.updateUser);
-router.get("/users", userController.getAllUsers);
-router.get("/protected", userController.verifyToken, (req, res) => {
+
+// Only admin can get all users
+router.get("/users", verifyToken, requireAdmin, userController.getAllUsers);
+router.delete(
+  "/users/:id",
+  verifyToken,
+  requireAdmin,
+  userController.deleteUser
+);
+
+
+// Any user can update their profile (optionally you might want to protect this too)
+router.put("/users/:id", verifyToken, userController.updateUser);
+
+// Protected: Get logged-in user's own info
+router.get("/me", verifyToken, userController.getMe);
+
+// Example protected route for testing
+router.get("/protected", verifyToken, (req, res) => {
   res.json({ message: "Protected route" });
 });
 
-// Problem CRUD (admin/user)
-router.post(
-  "/problems",
-  userController.verifyToken,
-  problemController.createProblem
-);
-router.get(
-  "/problems",
-  userController.verifyToken,
-  problemController.getProblems
-);
-router.get(
-  "/problems/:id",
-  userController.verifyToken,
-  problemController.getProblemById
-);
-router.put(
-  "/problems/:id",
-  userController.verifyToken,
-  problemController.updateProblem
-);
-router.delete(
-  "/problems/:id",
-  userController.verifyToken,
-  problemController.deleteProblem
-);
+// Problem CRUD (protected)
+router.post("/problems", verifyToken, problemController.createProblem);
+router.get("/problems", verifyToken, problemController.getProblems);
+router.get("/problems/:id", verifyToken, problemController.getProblemById);
+router.put("/problems/:id", verifyToken, problemController.updateProblem);
+router.delete("/problems/:id", verifyToken, problemController.deleteProblem);
 
 // Submission & Solution routes
 router.post("/solutions", solutionController.solution);
@@ -68,7 +63,7 @@ router.get(
 );
 router.get("/submissions", submissionController.getAllSubmissions);
 
-// Stripe: Create Checkout Session (prebuilt Stripe form)
+// Stripe: Create Checkout Session
 router.post("/create-checkout-session", async (req, res) => {
   const { priceId, email } = req.body;
   try {
@@ -109,16 +104,12 @@ router.get("/checkout-session/:sessionId", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(
       req.params.sessionId,
-      {
-        expand: ["line_items", "customer"],
-      }
+      { expand: ["line_items", "customer"] }
     );
     res.json(session);
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 });
-
-router.get("/me", userController.verifyToken, userController.getMe);
 
 export default router;

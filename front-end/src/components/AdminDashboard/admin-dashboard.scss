@@ -9,12 +9,15 @@
 
   @media (max-width: 900px) {
     padding: 1.2rem 0.8rem 1.2rem 0.8rem;
-    border-radius: 10px;
+    border-radius: 12px;
   }
-  @media (max-width: 600px) {
-    padding: 0.6rem 0.2rem;
-    border-radius: 0;
+  @media (max-width: 700px) {
+    padding: 0.7rem 0.5rem;
+    border-radius: 9px;
     box-shadow: none;
+  }
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.4rem;
   }
 }
 
@@ -44,22 +47,23 @@
   min-width: 230px;
   max-width: 350px;
   height: 9.2rem;
-  border-radius: 12px;
+  border-radius: 16px;
   background-size: cover;
   background-position: center;
   padding: 1.5rem 1.5rem 1.2rem 1.5rem;
-  box-shadow: 0 3px 14px 0 rgba(0,0,0,0.07);
+  box-shadow: 0 3px 14px 0 rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  margin: 0 auto;
+  margin: 0;
 
-  h3, h1 {
+  h3,
+  h1 {
     color: #fff;
     margin: 0;
     letter-spacing: 0.02em;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   }
   h3 {
     font-size: 1.15rem;
@@ -74,18 +78,27 @@
     opacity: 0.98;
   }
 
+  @media (max-width: 900px) {
+    border-radius: 12px;
+    padding: 1.1rem 1.1rem 1rem 1.1rem;
+  }
   @media (max-width: 700px) {
     height: 7.6rem;
     min-width: 0;
-    width: 95vw;
-    padding: 1.1rem 1rem 1rem 1.3rem;
-    max-width: unset;
-    border-radius: 9px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 13px;
+    margin: 0.7rem auto;
+    padding: 1.1rem 1.2rem 1rem 1.2rem;
+    box-sizing: border-box;
   }
   @media (max-width: 480px) {
-    width: 100vw;
-    padding: 0.75rem 0.8rem;
-    border-radius: 0;
+    width: 100%;
+    max-width: 98vw;
+    padding: 0.85rem 0.9rem 0.85rem 0.9rem;
+    border-radius: 10px;
+    margin: 0.5rem auto;
+    box-sizing: border-box;
   }
 }
 
@@ -116,28 +129,46 @@
     color: #203a43;
   }
 
-  > div {
+  .problem-dist-chart-container {
     width: 100%;
-    min-width: 180px;
-    height: 14rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @media (max-width: 700px) {
-      height: 11rem;
+    max-width: 400px;
+    min-width: 220px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    height: 320px;
+    @media (max-width: 900px) {
+      height: 240px;
+      max-width: 320px;
+      min-width: 170px;
     }
-    @media (max-width: 480px) {
-      height: 8rem;
+    @media (max-width: 600px) {
+      height: 180px;
+      max-width: 98vw;
+      min-width: 100px;
+      padding: 0.5rem 0;
+    }
+    .recharts-wrapper,
+    .recharts-surface {
+      width: 100% !important;
+      height: 100% !important;
     }
   }
 
   @media (max-width: 700px) {
     padding: 1rem 0.2rem;
-    border-radius: 7px;
+    border-radius: 10px;
+    margin: 1.2rem 0.1rem 0 0.1rem;
   }
   @media (max-width: 480px) {
     margin: 1.1rem 0 0 0;
     border-radius: 0;
     background: #f7f7fa;
   }
+}
+
+.ad-db-error {
+  color: #e53935;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
 }
