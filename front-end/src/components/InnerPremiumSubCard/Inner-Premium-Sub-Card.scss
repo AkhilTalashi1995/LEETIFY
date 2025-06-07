@@ -149,3 +149,31 @@
     }
   }
   
+
+  .test-card-info {
+    background: #fff9e6;
+    color: #242424;
+    border-left: 6px solid #f3a953;
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin: 0 auto 32px auto;
+    max-width: 500px;
+    font-size: 1.01rem;
+    box-shadow: 0 2px 8px 0 rgba(253, 170, 67, 0.06);
+  
+    ul {
+      margin: 0.7em 0 0.5em 1.1em;
+      padding: 0;
+      li {
+        margin-bottom: 0.15em;
+        font-family: monospace;
+        font-size: 1.04em;
+      }
+    }
+    small {
+      color: #ba8800;
+      display: block;
+      margin-top: 5px;
+    }
+  }
+  

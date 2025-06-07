@@ -69,6 +69,25 @@ function InnerPremiumSubCard() {
 
   return (
     <>
+      {/* Test Card Info for Demo */}
+      <div className="test-card-info">
+        <strong>Test Card Details (for demo/testing only):</strong>
+        <ul>
+          <li>
+            <strong>Card Number:</strong> 4242 4242 4242 4242
+          </li>
+          <li>
+            <strong>Expiry Date:</strong> 12/34
+          </li>
+          <li>
+            <strong>CVC:</strong> 123
+          </li>
+        </ul>
+        <small>
+          Use these details on the Stripe Checkout screen to simulate a
+          successful payment. No actual charge will occur.
+        </small>
+      </div>
       <div className="subscription-card">
         {/* Monthly Card */}
         <div className="sub-card monthly">
