@@ -15,8 +15,8 @@ import Premium from "./pages/PremiumPage/PremiumPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import InnerPremiumPage from "./pages/InnerPremiumPage/InnerPremiumPage";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import MonthlySubscription from "./pages/MonthlySubscription/MonthlySubscription";
-import YearlySubscription from "./pages/YearlySubscription/YearlySubscription";
+// import MonthlySubscription from "./pages/MonthlySubscription/MonthlySubscription";
+// import YearlySubscription from "./pages/YearlySubscription/YearlySubscription";
 import ThankYou from "./pages/ThankYou/ThankYou";
 import CancelTransaction from "./pages/CancelTransaction/CancelTransaction";
 import UserDashboardPage from "./pages/UserDashboardPage/UserDashboardPage";
@@ -85,14 +85,14 @@ function App() {
             path="/problems/:problemName"
             element={<ProtectedRoute element={<ProblemPage />} />}
           />
-          <Route
+          {/* <Route
             path="/monthlysubscription"
             element={<ProtectedRoute element={<MonthlySubscription />} />}
           />
           <Route
             path="/yearlysubscription"
             element={<ProtectedRoute element={<YearlySubscription />} />}
-          />
+          /> */}
           <Route
             path="/thankyou"
             element={<ProtectedRoute element={<ThankYou />} />}

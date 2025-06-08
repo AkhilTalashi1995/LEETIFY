@@ -74,5 +74,6 @@ STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
 ```env
 REACT_APP_API_URL=http://localhost:8000
 REACT_APP_STRIPE_PUBLIC_KEY=your-stripe-publishable-key
-</details> ```
+```
+</details> 
 
