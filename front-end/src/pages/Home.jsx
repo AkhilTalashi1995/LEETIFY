@@ -21,7 +21,7 @@ function DemoModal({ open, onClose }) {
         </button>
         <div className="demo-modal-video-container">
           <iframe
-            src="https://www.youtube.com/embed/2YP86XvqiwE?autoplay=1"
+            src="https://www.youtube.com/embed/UlsqZqGAG1Q?autoplay=1"
             title="Project Walkthrough"
             frameBorder="0"
             allow="autoplay; encrypted-media"
