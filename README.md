@@ -67,11 +67,12 @@ MONGODB_URI=your-mongodb-uri
 JWT_SECRET=your-jwt-secret
 STRIPE_SECRET_KEY=your-stripe-secret-key
 STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
-
+```
 </details> 
 
 <details> <summary><b>Frontend <code>front-end/.env</code></b></summary>
 
+```env
 REACT_APP_API_URL=http://localhost:8000
 REACT_APP_STRIPE_PUBLIC_KEY=your-stripe-publishable-key
 </details> ```
