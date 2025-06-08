@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import "./update-problem.scss";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProblems } from "../../store/problemActions";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {
   Button,
@@ -9,23 +9,70 @@ import {
   MenuItem,
   Select,
   TextField,
+  Alert,
 } from "@mui/material";
 import { Editor } from "@monaco-editor/react";
 import axios from "axios";
+import "./update-problem.scss";
+
+// --- Modal component, reused for update and delete success ---
+function SuccessModal({ open, title, message, onClose }) {
+  if (!open) return null;
+  return (
+    <div className="premium-modal-backdrop" onClick={onClose}>
+      <div className="premium-modal" onClick={(e) => e.stopPropagation()}>
+        <h3>{title}</h3>
+        <p>{message}</p>
+        <button className="premium-modal-btn" onClick={onClose}>
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// --- Confirmation modal for delete ---
+function ConfirmDeleteModal({ open, problemName, onCancel, onConfirm }) {
+  if (!open) return null;
+  return (
+    <div className="premium-modal-backdrop" onClick={onCancel}>
+      <div className="premium-modal" onClick={(e) => e.stopPropagation()}>
+        <h3>Are you sure?</h3>
+        <p>
+          Do you really want to delete <b>{problemName}</b>?<br />
+          This action cannot be undone.
+        </p>
+        <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
+          <button
+            className="premium-modal-btn"
+            style={{ background: "#232323", color: "#fff" }}
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+          <button
+            className="premium-modal-btn"
+            style={{
+              background: "linear-gradient(90deg, #ff6868, #f46b45)",
+              color: "#222",
+            }}
+            onClick={onConfirm}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const UpdateProblem = () => {
-  const { problemList } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const problemList = useSelector((state) => state.problemList);
+
   const [selectedProblem, setSelectedProblem] = useState({});
   const [problemName, setProblemName] = useState("");
   const [showUpdateOptions, setShowUpdateOptions] = useState(false);
@@ -40,6 +87,41 @@ const UpdateProblem = () => {
     solution: "",
     locked: false,
   });
+
+  const [errors, setErrors] = useState({});
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  // Fetch the problems on component mount
+  useEffect(() => {
+    dispatch(fetchProblems());
+  }, [dispatch]);
+
+  // --- VALIDATION (Same as SetProblem) ---
+  const validate = () => {
+    const err = {};
+    if (!formData.problemName.trim())
+      err.problemName = "Problem Name is required";
+    if (!formData.problemDescription.trim())
+      err.problemDescription = "Description is required";
+    if (!formData.starterCode.trim())
+      err.starterCode = "Starter Code is required";
+    if (!formData.examples.trim()) err.examples = "Examples are required";
+    if (!formData.testcases.trim()) err.testcases = "Test Cases are required";
+    // Validate JSON for examples & testcases
+    try {
+      if (formData.examples.trim()) JSON.parse(formData.examples);
+    } catch {
+      err.examples = "Examples must be valid JSON";
+    }
+    try {
+      if (formData.testcases.trim()) JSON.parse(formData.testcases);
+    } catch {
+      err.testcases = "Test Cases must be valid JSON";
+    }
+    return err;
+  };
 
   const handleSelectChange = (event) => {
     setProblemName(event.target.value);
@@ -91,10 +173,12 @@ const UpdateProblem = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (formData.starterCode && formData.examples && formData.testcases) {
+    const err = validate();
+    setErrors(err);
+    if (Object.keys(err).length === 0) {
       let problemData = {
-        title: formData.problemName,
-        description: formData.problemDescription,
+        title: formData.problemName.trim(),
+        description: formData.problemDescription.trim(),
         starter_code: formData.starterCode,
         difficulty: formData.difficulty,
         examples: formData.examples,
@@ -116,6 +200,7 @@ const UpdateProblem = () => {
         .then((res) => {
           setShowProblemEditSpace(false);
           setShowUpdateOptions(false);
+          setUpdateSuccess(true);
           setFormData({
             problemName: "",
             problemDescription: "",
@@ -126,26 +211,44 @@ const UpdateProblem = () => {
             testcases: "",
             locked: false,
           });
+          // Fetch updated list after update
+          dispatch(fetchProblems());
         })
         .catch((err) => {
-          console.log(err);
+          setErrors({ api: err?.response?.data?.message || "Update failed." });
         });
     }
   };
 
-  const handleDelete = () => {
+  // --- Delete, with confirmation popup ---
+  const handleDeleteRequest = () => {
+    setConfirmDelete(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    setConfirmDelete(false);
     axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`
+        `${process.env.REACT_APP_API_URL}/problems/${selectedProblem._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+          },
+        }
       )
       .then((res) => {
         setShowUpdateOptions(false);
         setShowProblemEditSpace(false);
+        setProblemName(""); // <-- Reset dropdown
+        setSelectedProblem({}); // <-- Reset selected problem
+        setDeleteSuccess(true);
+        // Fetch updated list after delete
+        dispatch(fetchProblems());
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        setErrors({ api: err?.response?.data?.message || "Delete failed." })
+      );
   };
-
-  useEffect(() => {}, [showUpdateOptions]);
 
   return (
     <>
@@ -170,7 +273,6 @@ const UpdateProblem = () => {
                   className: "select-problem-dropdown-menu",
                   style: {
                     maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                    // DO NOT SET WIDTH HERE!
                   },
                 },
               }}
@@ -197,7 +299,11 @@ const UpdateProblem = () => {
               >
                 Update
               </Button>
-              <Button variant="contained" color="error" onClick={handleDelete}>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleDeleteRequest}
+              >
                 Delete
               </Button>
             </div>
@@ -211,6 +317,9 @@ const UpdateProblem = () => {
                       className="setproblem-form"
                       onSubmit={handleFormSubmit}
                     >
+                      {errors.api && (
+                        <Alert severity="error">{errors.api}</Alert>
+                      )}
                       <div className="setproblem-block-1">
                         <div className="setproblem-block-1a">
                           <TextField
@@ -220,6 +329,8 @@ const UpdateProblem = () => {
                             variant="outlined"
                             fullWidth
                             required
+                            error={!!errors.problemName}
+                            helperText={errors.problemName}
                             style={{ marginBottom: "1rem" }}
                             value={formData.problemName}
                             onChange={handleFormDataChange}
@@ -234,6 +345,8 @@ const UpdateProblem = () => {
                             rows={18}
                             name="problemDescription"
                             value={formData.problemDescription}
+                            error={!!errors.problemDescription}
+                            helperText={errors.problemDescription}
                             onChange={handleFormDataChange}
                           />
                         </div>
@@ -252,6 +365,17 @@ const UpdateProblem = () => {
                               scrollBeyondLastLine: false,
                             }}
                           />
+                          {errors.starterCode && (
+                            <div
+                              style={{
+                                color: "red",
+                                fontSize: "0.92rem",
+                                marginTop: "4px",
+                              }}
+                            >
+                              {errors.starterCode}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="setproblem-block-2">
@@ -295,6 +419,17 @@ const UpdateProblem = () => {
                               }}
                               className="test-case-editor"
                             />
+                            {errors.examples && (
+                              <div
+                                style={{
+                                  color: "red",
+                                  fontSize: "0.92rem",
+                                  marginTop: "4px",
+                                }}
+                              >
+                                {errors.examples}
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="setproblem-block-3b">
@@ -316,6 +451,17 @@ const UpdateProblem = () => {
                               }}
                               className="test-case-editor"
                             />
+                            {errors.testcases && (
+                              <div
+                                style={{
+                                  color: "red",
+                                  fontSize: "0.92rem",
+                                  marginTop: "4px",
+                                }}
+                              >
+                                {errors.testcases}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -385,6 +531,32 @@ const UpdateProblem = () => {
           )}
         </div>
       </div>
+      {/* --- Update Success Modal --- */}
+      <SuccessModal
+        open={updateSuccess}
+        title="Problem Updated!"
+        message={
+          <span>
+            <b>{formData.problemName || selectedProblem?.title}</b> was updated
+            successfully.
+          </span>
+        }
+        onClose={() => setUpdateSuccess(false)}
+      />
+      {/* --- Delete Success Modal --- */}
+      <SuccessModal
+        open={deleteSuccess}
+        title="Problem Deleted!"
+        message="The problem has been deleted."
+        onClose={() => setDeleteSuccess(false)}
+      />
+      {/* --- Confirm Delete Modal --- */}
+      <ConfirmDeleteModal
+        open={confirmDelete}
+        problemName={formData.problemName || selectedProblem?.title}
+        onCancel={() => setConfirmDelete(false)}
+        onConfirm={handleDeleteConfirm}
+      />
     </>
   );
 };

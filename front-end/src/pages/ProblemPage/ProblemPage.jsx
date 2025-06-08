@@ -24,12 +24,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {/* <Typography>{children}</Typography> */}
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -49,7 +44,6 @@ function a11yProps(index) {
 
 const ProblemPage = () => {
   const [value, setValue] = React.useState(0);
-
   const dispatch = useDispatch();
 
   const onSuccessfulSubmission = () => {
@@ -58,6 +52,11 @@ const ProblemPage = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    // Hide the submission code panel if leaving the Submissions tab
+    if (newValue !== 2) {
+      dispatch({ type: "HIDE_SUBMISSION_CODE_PANEL" });
+    }
   };
 
   const { selectedProblem, problemSubmissionStatus, showSubmissionCodePanel } =

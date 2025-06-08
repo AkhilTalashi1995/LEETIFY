@@ -100,9 +100,17 @@ export const solution = async (req, res, next) => {
     Promise.all(promises)
       .then((results) => {
         let status = "";
-        let hasError = results.some((result) => result.error);
+        let hasFatalError = results.some(
+          (result) =>
+            result.error &&
+            (result.error.includes("Syntax Error") ||
+              result.error.includes("Timeout") ||
+              result.error.includes("No output produced") ||
+              result.error.includes("Runtime") ||
+              result.error.includes("Output is not valid JSON"))
+        );
 
-        if (hasError) {
+        if (hasFatalError) {
           status = "Error";
         } else if (results.every((result) => result.isOutputMatched)) {
           status = "Accepted";

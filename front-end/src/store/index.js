@@ -1,5 +1,5 @@
-import { createStore } from "redux";
-
+import { createStore, applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
 // Helpers//
 function loadFromLocalStorage() {
   try {
@@ -98,6 +98,9 @@ const reducer = (state = initialState, action) => {
   return newState;
 };
 
-const store = createStore(reducer, { ...initialState, ...persistedState });
-
+const store = createStore(
+  reducer,
+  { ...initialState, ...persistedState },
+  applyMiddleware(thunk)
+);
 export default store;

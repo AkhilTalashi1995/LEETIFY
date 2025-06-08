@@ -35,15 +35,19 @@ function a11yProps(index) {
     "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
+
+console.log("Does this log print?");
+
 // handle submit result
 const SubmitResult = ({ problem, results, showingSubmittedCode }) => {
+  console.log("SubmitResult results:", results);
   console.log(results);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-// map testcases
+  // map testcases
   const mapInput = (test_case) => {
     let items = [];
     for (let key in test_case.input) {
@@ -59,11 +63,14 @@ const SubmitResult = ({ problem, results, showingSubmittedCode }) => {
           <>
             <div className="result-status">
               {results.status === "Accepted" ? (
-                <h4 className="accepted-status-heading">{results.status}</h4>
+                <h4 className="accepted-status-heading">Accepted</h4>
+              ) : results.status === "Wrong Answer" ? (
+                <h4 className="wrong-status-heading">Wrong Answer</h4>
               ) : (
-                <h4 className="wrong-status-heading">{results.status}</h4>
+                <h4 className="wrong-status-heading">Error</h4>
               )}
             </div>
+
             <div className="tab-parent">
               <Tabs
                 className="tab"
