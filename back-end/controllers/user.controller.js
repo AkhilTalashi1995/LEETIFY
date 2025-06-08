@@ -2,7 +2,17 @@ import * as userService from "../services/user.service.js";
 import User from "../models/user/user.js";
 import bcrypt from "bcrypt";
 
-// CREATE USER
+/**
+ * Create a new user account.
+ * Delegates creation logic to the user service.
+ * Handles duplicate user and generic errors.
+ *
+ * @route POST /users/register
+ * @param {Object} req - Express request (expects firstname, lastname, email, password, user_status in body)
+ * @param {Object} res - Express response
+ * @param {Function} next - Express next middleware function
+ * @returns {Object} user - Created user document (without sensitive fields)
+ */
 export const createUser = async (req, res, next) => {
   try {
     const { firstname, lastname, email, password, user_status } = req.body;
@@ -25,7 +35,16 @@ export const createUser = async (req, res, next) => {
   }
 };
 
-// LOGIN USER
+/**
+ * Log in a user and return JWT token.
+ * Delegates authentication to the user service.
+ *
+ * @route POST /users/login
+ * @param {Object} req - Express request (expects email, password in body)
+ * @param {Object} res - Express response
+ * @param {Function} next - Express next middleware function
+ * @returns {Object} token, user - JWT token and user document (non-sensitive fields)
+ */
 export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -36,7 +55,15 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
-// GET ALL USERS (for admin panel)
+/**
+ * Get all users for admin panel (only safe fields).
+ *
+ * @route GET /users
+ * @param {Object} req - Express request
+ * @param {Object} res - Express response
+ * @param {Function} next - Express next middleware function
+ * @returns {Object} users - Array of user documents (firstname, lastname, email, user_status)
+ */
 export const getAllUsers = async (req, res, next) => {
   try {
     // Only return non-sensitive fields!
@@ -47,7 +74,16 @@ export const getAllUsers = async (req, res, next) => {
   }
 };
 
-// UPDATE USER
+/**
+ * Update an existing user's profile (including password).
+ * Hashes new password before saving.
+ *
+ * @route PUT /users/:id
+ * @param {Object} req - Express request (expects _id, firstname, lastname, email, password in body)
+ * @param {Object} res - Express response
+ * @param {Function} next - Express next middleware function
+ * @returns {Object} user - Updated user document
+ */
 export const updateUser = async (req, res, next) => {
   try {
     const { _id, firstname, lastname, email, password } = req.body;
@@ -59,6 +95,7 @@ export const updateUser = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    // Update fields and save
     user.firstname = firstname;
     user.lastname = lastname;
     user.email = email;
@@ -71,7 +108,15 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-
+/**
+ * Delete a user by ID (admin-only).
+ * Prevents deletion of admin users.
+ *
+ * @route DELETE /users/:id
+ * @param {Object} req - Express request (expects id param)
+ * @param {Object} res - Express response
+ * @returns {Object} message - Deletion status
+ */
 export const deleteUser = async (req, res) => {
   try {
     const userIdToDelete = req.params.id;
@@ -92,7 +137,14 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-// GET LOGGED IN USER PROFILE
+/**
+ * Get the profile of the currently authenticated user.
+ *
+ * @route GET /users/me
+ * @param {Object} req - Express request (expects userId on req)
+ * @param {Object} res - Express response
+ * @returns {Object} user - Authenticated user's document
+ */
 export const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.userId);

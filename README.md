@@ -1,55 +1,78 @@
-[![HitCount](https://hits.dwyl.com/akhiltalashi1995/LEETIFY.svg?style=flat-square)](http://hits.dwyl.com/akhiltalashi1995/LEETIFY)
+# Leetify
 
-<div align="center">
-<img src="/front-end/public/logo-main.png" width="125px" />
-</div>
-<H1 align="center">Leetify</H1>
+Leetify is a modern, full-stack coding practice and interview preparation platform.  
+It helps students and professionals enhance their coding skills, track progress, and prepare for technical interviews—while providing premium features, progress tracking, and Stripe-based subscriptions.
 
-## Overview
+---
 
-Leetify is an online coding platform that offers a diverse collection of challenges to help developers prepare for technical interviews. Covering various data structures and algorithms like arrays, linked lists, trees, and graphs, it enhances problem-solving skills for software engineers, developers, and students, making it an effective tool for technical interview preparation.
+## 🛠 Tech Stack
 
-**Contributors:** @Akhil Talashi | @Snehashis Lenka | @Rutuja Ghate | @Aishwarya Adduri
+- **Frontend**: React, Redux, SCSS
+- **Backend**: Node.js, Express, MongoDB (Mongoose), Stripe, AWS EC2
+- **Authentication**: JWT, bcrypt
+
+---
+
+## 🚀 Features
+
+- **User Authentication** (Sign up, Login, JWT-protected routes)
+- **Problem Bank**: Browse, filter, and solve coding problems of varying difficulty
+- **Code Editor & Judge**: Write code in-browser, run against test cases, get instant feedback
+- **Submission History**: Track accepted/wrong/running code, see previous attempts
+- **Premium Access**: Unlock premium/locked problems via Stripe subscription (monthly/yearly)
+- **Admin Panel**: Manage problems, view user data (admin-only)
+- **Responsive UI**: Works across devices and browsers
+
 
 **Live: https://leetify.vercel.app/**
 
-**Youtube: [Watch Here](https://www.youtube.com/watch?v=2YP86XvqiwE&t=8s)**
+**Youtube: [Watch Here](https://www.youtube.com/watch?v=UlsqZqGAG1Q)**
 
-[Model Diagram](https://github.com/AkhilTalashi1995/LEETIFY/blob/main/modelDiag.jpeg)
+## ⚡ Quick Start
 
-## Tech stack
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/AkhilTalashi1995/LEETIFY.git
+    ```
 
-- React JS
-- Redux
-- NodeJS
-- MongoDB
-- Material UI
-- SCSS
+2. **Setup Environment Variables** (see below)
 
-## Key Features:
+3. **Run Backend**
+    ```bash
+    cd back-end
+    npm install
+    npm start
+    ```
+    Server runs at `http://localhost:8000`
 
-- **Authentication:** Sign up, log in/out
-- **User Dashboard:** View stats(problems and submissions)
-- **Admin Dashboard:** view stats(users, problems and submissions)
-- **Problem Management:** Problems(CRUD), track submission status
-- **Code Editor:** Monaco code editor, code compliation and execution
-- **Deployment & Testing:** Production deployment, automated/manual testing, and bug fixing
+4. **Run Frontend**
+    ```bash
+    cd front-end
+    npm install
+    npm start
+    ```
+    Client runs at `http://localhost:3000`
 
-## How to start
+---
 
-- Clone Repository `git clone https://github.com/AkhilTalashi1995/LEETIFY.git`
-- Run Backend
+## 🗝️ Environment Variables
 
-  - `cd back-end`
-  - `npm install` to install dependencies
-  - `npm start` to start the backend server
+To run Leetify locally, you need two `.env` files: one for backend, one for frontend.
 
-- Run Frontend
+<details>
+<summary><b>Backend <code>back-end/.env</code></b></summary>
 
-  - `cd front-end`
-  - `npm install` to install dependencies
-  - `npm start` to start the client
+```env
+MONGODB_URI=your-mongodb-uri
+JWT_SECRET=your-jwt-secret
+STRIPE_SECRET_KEY=your-stripe-secret-key
+STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
 
-- Client application starts on `https://leetify.vercel.app`
+</details> 
 
-- Server is available on `https://leetify-backend.vercel.app`
+<details> <summary><b>Frontend <code>front-end/.env</code></b></summary>
+
+REACT_APP_API_URL=http://localhost:8000
+REACT_APP_STRIPE_PUBLIC_KEY=your-stripe-publishable-key
+</details> ```
+

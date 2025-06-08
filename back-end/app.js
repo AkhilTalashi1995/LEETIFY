@@ -11,7 +11,19 @@ dotenv.config();
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// CORS middleware
+/**
+ * ==========================
+ *       SERVER DOCS
+ * ==========================
+ * - Configures Express, CORS, MongoDB, Stripe, and all main middleware
+ * - Handles Stripe webhooks for subscription events
+ * - Registers API routes and a DB health check endpoint
+ * - Starts server on PORT 8000
+ */
+
+/**
+ * Enable CORS for frontend app
+ */
 app.use(
   cors({
     origin: "https://leetify.vercel.app",
@@ -19,7 +31,12 @@ app.use(
   })
 );
 
-// ********** STRIPE WEBHOOK ROUTE (must be FIRST, before express.json) **********
+/**
+ * Stripe Webhook endpoint (MUST use express.raw BEFORE JSON middleware)
+ *
+ * Handles subscription completed events and upgrades user to PREMIUM.
+ * @route POST /stripe-webhook
+ */
 app.post(
   "/stripe-webhook",
   express.raw({ type: "application/json" }),
@@ -36,7 +53,6 @@ app.post(
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    // Handle subscription activation (upgrade to premium)
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
       const subscriptionId = session.subscription;
@@ -44,17 +60,17 @@ app.post(
 
       if (subscriptionId && customerEmail) {
         try {
-          // THIS IS THE PART TO UPDATE:
+          // Retrieve subscription details from Stripe
           const subscription = await stripe.subscriptions.retrieve(
             subscriptionId
           );
 
-          // Try to use subscription.current_period_end if possible
+          // Determine subscription end date (from Stripe's UNIX timestamp)
           let subscriptionEnd = subscription.current_period_end
             ? new Date(subscription.current_period_end * 1000)
             : null;
 
-          // Fallback logic if subscriptionEnd is null
+          // Fallback: Calculate subscription end manually if missing
           if (!subscriptionEnd) {
             const startDate = subscription.start_date;
             const interval = subscription.plan.interval;
@@ -72,7 +88,7 @@ app.post(
             }
           }
 
-          // Find and update user
+          // Upgrade user in DB to PREMIUM_USER and set subscription_end
           const user = await User.findOne({ email: customerEmail });
           if (user) {
             user.user_status = "PREMIUM_USER";
@@ -95,13 +111,22 @@ app.post(
   }
 );
 
-// ********** JSON PARSING FOR ALL OTHER ROUTES **********
+/**
+ * JSON body parsing for all other routes
+ * (Stripe webhook must be above this)
+ */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// ********** ALL OTHER ROUTES **********
+/**
+ * Main API routes (controllers, authentication, business logic)
+ */
 routes(app);
 
+/**
+ * MongoDB connection health endpoint
+ * @route GET /db-health
+ */
 app.get("/db-health", (req, res) => {
   const state = mongoose.connection.readyState;
   let status = "";
@@ -124,10 +149,16 @@ app.get("/db-health", (req, res) => {
   res.json({ dbState: status });
 });
 
+/**
+ * Start the server
+ */
 app.listen(8000, () => {
   console.log("Server started on port 8000!");
 });
 
+/**
+ * Connect to MongoDB Atlas
+ */
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully!"))

@@ -5,7 +5,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import SubmitResult from "../SubmitResult/SubmitResult";
 import "./submission-code-panel.scss";
-//redux useSelector to get selected problem and display submission code panel
 const SubmissionCodePanel = () => {
   const { selectedProblem, showSubmissionCodePanel } = useSelector(
     (state) => state

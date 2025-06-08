@@ -1,6 +1,5 @@
 import React from "react";
 import "./premiumcontent.scss";
-// Leetify subscription selection card
 function PremiumContent() {
   return (
     <>
@@ -32,8 +31,6 @@ function PremiumContent() {
             , the best plans for all subscribers.
           </p>
         </div>
-
-        {/* subscription section*/}
       </section>
     </>
   );

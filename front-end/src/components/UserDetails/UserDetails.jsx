@@ -107,7 +107,6 @@ function UserDetails() {
             handleSave();
           }}
         >
-          {/* ... rest of form unchanged ... */}
           <TextField
             label="First Name"
             name="firstname"
@@ -156,7 +155,7 @@ function UserDetails() {
             sx={{
               marginTop: "1.6rem",
               padding: "0.9rem",
-              borderRadius: "9999px", // <-- pill style
+              borderRadius: "9999px",
               fontWeight: 600,
               fontSize: "1.08rem",
               background: "#42bd9f",

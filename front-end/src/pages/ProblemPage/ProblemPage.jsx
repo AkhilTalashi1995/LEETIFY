@@ -53,7 +53,6 @@ const ProblemPage = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
 
-    // Hide the submission code panel if leaving the Submissions tab
     if (newValue !== 2) {
       dispatch({ type: "HIDE_SUBMISSION_CODE_PANEL" });
     }

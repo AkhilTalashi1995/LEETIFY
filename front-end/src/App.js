@@ -23,21 +23,29 @@ import UserDashboardPage from "./pages/UserDashboardPage/UserDashboardPage";
 import ComingSoon from "./pages/ComingSoon/ComingSoon";
 import PublicRoute from "./components/PublicRoute/PublicRoute"; // adjust path as needed
 
-
-// 1. Stripe imports
+// Stripe Elements integration
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-// 2. Your Stripe *publishable* key (get this from Stripe dashboard, NOT secret key)
+/**
+ * Stripe public key (use only publishable key here, never secret!)
+ * @type {Promise<Stripe | null>}
+ */
 const stripePromise = loadStripe(
   "pk_test_51RWNYy03QVaE1lftjfjiGDARWs9z8G0PWnnZzDu5NFre2hzcZTfbdkjeWGcJfC5jfK4Qbjh2Ua4AS50zbspDAQOY00xa8q8mcD"
 );
 
+/**
+ * Main App component. Handles:
+ * - Stripe Elements context
+ * - React Router setup (public/protected routes)
+ * - Auth protection via ProtectedRoute and PublicRoute
+ */
 function App() {
   const state = useSelector((state) => state);
 
   return (
-    // 3. Wrap your app (or only payment routes) with <Elements>
+    // Stripe Elements wrapper required for any payment integration
     <Elements stripe={stripePromise}>
       <BrowserRouter>
         <Routes>
@@ -55,9 +63,8 @@ function App() {
             path="/premiumpage"
             element={<PublicRoute element={<Premium />} />}
           />
-          
-          {/* Protected pages */}
 
+          {/* Protected pages - must be logged in to access */}
           <Route
             path="/home"
             element={<ProtectedRoute element={<UserHome />} />}
@@ -78,27 +85,22 @@ function App() {
             path="/problems/:problemName"
             element={<ProtectedRoute element={<ProblemPage />} />}
           />
-
           <Route
             path="/monthlysubscription"
             element={<ProtectedRoute element={<MonthlySubscription />} />}
           />
-
           <Route
             path="/yearlysubscription"
             element={<ProtectedRoute element={<YearlySubscription />} />}
           />
-
           <Route
             path="/thankyou"
             element={<ProtectedRoute element={<ThankYou />} />}
           />
-
           <Route
             path="/canceltransaction"
             element={<ProtectedRoute element={<CancelTransaction />} />}
           />
-
           <Route
             path="/comingsoon"
             element={<ProtectedRoute element={<ComingSoon />} />}
@@ -109,15 +111,27 @@ function App() {
   );
 }
 
+/**
+ * Route guard for authenticated pages.
+ * Redirects to home if not logged in.
+ *
+ * @param {object} props
+ * @param {JSX.Element} props.element - The element to render if authenticated
+ * @returns {JSX.Element}
+ */
 function ProtectedRoute(props) {
+  // Extract user data from Redux state
   const state = useSelector((state) => state.userData);
 
+  // Check if user has a valid token
   const isAuthenticated = state ? authenticate(state.token) : false;
 
+  // Redirect to home if not authenticated
   if (!isAuthenticated) {
     return <Navigate to="/" />;
   }
 
+  // Otherwise, render the requested page
   return props.element;
 }
 

@@ -5,7 +5,15 @@ import Footer from "./UserHome/Footer";
 import LandingPageNavbar from "../components/LandingPageNavbar/LandingPageNavbar";
 import CustomerReviews from "../components/CustomerReviews/CustomerReviews";
 
-// Demo Modal Component
+/**
+ * DemoModal component
+ * Displays a YouTube walkthrough video in a modal dialog.
+ *
+ * @param {object} props
+ * @param {boolean} props.open - Controls whether modal is visible
+ * @param {function} props.onClose - Callback for closing the modal
+ * @returns {JSX.Element|null}
+ */
 function DemoModal({ open, onClose }) {
   if (!open) return null;
 
@@ -33,9 +41,18 @@ function DemoModal({ open, onClose }) {
   );
 }
 
+/**
+ * Home page for the Leetify platform.
+ * - Landing section
+ * - Unique selling proposition (USP) section
+ * - Developer tools highlight
+ * - Customer reviews & footer
+ * - Project walkthrough modal (auto-shown for first-time visitors)
+ */
 function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
+  // Show demo modal once per session for new users (delayed for UX)
   useEffect(() => {
     if (!sessionStorage.getItem("demoVideoShown")) {
       setTimeout(() => setModalOpen(true), 700); // slight delay for UX
@@ -45,9 +62,10 @@ function Home() {
 
   return (
     <>
+      {/* Navigation bar */}
       <LandingPageNavbar />
 
-      {/* First Fold */}
+      {/* First Fold: Landing hero */}
       <div className="first-fold gradient">
         <div className="first-fold-img2">
           <img src="img-frn.png" alt="Foreground" />
@@ -81,7 +99,7 @@ function Home() {
         </div>
       </div>
 
-      {/* USP Section */}
+      {/* Unique Selling Proposition (USP) Section */}
       <div className="usp">
         <div className="usp-content">
           <div className="usp-content-img1">
@@ -124,7 +142,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Developer Section */}
+      {/* Developer Tools Section */}
       <div className="dev">
         <div className="dev-content">
           <div className="dev-content-img1">
@@ -147,10 +165,11 @@ function Home() {
         </div>
       </div>
 
+      {/* Customer reviews and footer */}
       <CustomerReviews />
       <Footer />
 
-      {/* Demo Modal */}
+      {/* Project Demo Modal */}
       <DemoModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );

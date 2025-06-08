@@ -15,7 +15,6 @@ import { Editor } from "@monaco-editor/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-// --- Success Modal (styled like PremiumSubCard modal) ---
 function SuccessModal({ open, problemName, onClose }) {
   if (!open) return null;
   return (

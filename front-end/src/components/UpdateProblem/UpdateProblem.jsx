@@ -15,7 +15,6 @@ import { Editor } from "@monaco-editor/react";
 import axios from "axios";
 import "./update-problem.scss";
 
-// --- Modal component, reused for update and delete success ---
 function SuccessModal({ open, title, message, onClose }) {
   if (!open) return null;
   return (
@@ -211,7 +210,6 @@ const UpdateProblem = () => {
             testcases: "",
             locked: false,
           });
-          // Fetch updated list after update
           dispatch(fetchProblems());
         })
         .catch((err) => {
@@ -239,10 +237,9 @@ const UpdateProblem = () => {
       .then((res) => {
         setShowUpdateOptions(false);
         setShowProblemEditSpace(false);
-        setProblemName(""); // <-- Reset dropdown
-        setSelectedProblem({}); // <-- Reset selected problem
+        setProblemName("");
+        setSelectedProblem({}); 
         setDeleteSuccess(true);
-        // Fetch updated list after delete
         dispatch(fetchProblems());
       })
       .catch((err) =>

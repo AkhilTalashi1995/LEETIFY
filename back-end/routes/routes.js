@@ -10,16 +10,33 @@ import { verifyToken, requireAdmin } from "../middleware/auth.js";
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Healthcheck
+/**
+ * ===========================
+ *       API ROUTES DOC
+ * ===========================
+ *
+ * - Healthcheck
+ * - User Auth & Profile (Signup, Signin, Profile, Admin-only user listing)
+ * - Problem CRUD (protected)
+ * - Submissions & Solutions (user code evaluation, results)
+ * - Stripe Checkout for subscription
+ */
+
+/**
+ * Healthcheck endpoint
+ * @route GET /healthcheck
+ */
 router.get("/healthcheck", (req, res) => {
   res.status(200).send("healthcheck ok!");
 });
 
-// User Auth & Profile
-router.post("/signup", userController.createUser);
-router.post("/signin", userController.loginUser);
+/**
+ * User Auth & Profile
+ */
+router.post("/signup", userController.createUser); // Register new user
+router.post("/signin", userController.loginUser); // Login, returns JWT
 
-// Only admin can get all users
+// Admin-only: List all users, delete any user
 router.get("/users", verifyToken, requireAdmin, userController.getAllUsers);
 router.delete(
   "/users/:id",
@@ -28,49 +45,67 @@ router.delete(
   userController.deleteUser
 );
 
-
-// Any user can update their profile (optionally you might want to protect this too)
+// Any logged-in user can update their profile
 router.put("/users/:id", verifyToken, userController.updateUser);
 
-// Protected: Get logged-in user's own info
+// Get currently logged-in user's own profile
 router.get("/me", verifyToken, userController.getMe);
 
-// Example protected route for testing
+/**
+ * Protected test route (for auth middleware check)
+ * @route GET /protected
+ */
 router.get("/protected", verifyToken, (req, res) => {
   res.json({ message: "Protected route" });
 });
 
-// Problem CRUD (protected)
+/**
+ * Problem CRUD - All routes are protected (JWT required)
+ */
 router.post("/problems", verifyToken, problemController.createProblem);
 router.get("/problems", verifyToken, problemController.getProblems);
 router.get("/problems/:id", verifyToken, problemController.getProblemById);
 router.put("/problems/:id", verifyToken, problemController.updateProblem);
 router.delete("/problems/:id", verifyToken, problemController.deleteProblem);
 
-// Submission & Solution routes
+/**
+ * Submissions & Solutions
+ */
+// Run user's code and return results (public, not protected)
 router.post("/solutions", solutionController.solution);
+
+// Get all submissions by a user for a problem
 router.get(
   "/solutions/:userId/:problemId",
   submissionController.getAllSubmission
 );
+
+// Get count of unique problems solved by a user
 router.get(
   "/group-submission-count/:userId",
   submissionController.getProblemsSolvedUnique
 );
+
+// Get all submissions for a user (metadata)
 router.get(
   "/getAllUserSumbissions/:userId",
   submissionController.getAllUserSubmission
 );
+
+// Get all submissions in the system (admin/statistics)
 router.get("/submissions", submissionController.getAllSubmissions);
 
-// Stripe: Create Checkout Session
+/**
+ * Stripe Subscription Integration
+ */
+
+// Create a Stripe checkout session for subscription purchase
 router.post("/create-checkout-session", async (req, res) => {
   const { priceId, email } = req.body;
   try {
-    // 1. Find the user by email
+    // Prevent duplicate active subscriptions
     const user = await User.findOne({ email });
 
-    // 2. Check if the user is premium and subscription_end is in the future
     if (
       user &&
       user.user_status === "PREMIUM_USER" &&
@@ -83,7 +118,7 @@ router.post("/create-checkout-session", async (req, res) => {
       });
     }
 
-    // 3. Otherwise, allow Stripe session creation
+    // Create Stripe session for new subscription
     const session = await stripe.checkout.sessions.create({
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "subscription",
@@ -91,7 +126,6 @@ router.post("/create-checkout-session", async (req, res) => {
       success_url:
         "https://leetify.vercel.app/thankyou?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "https://leetify.vercel.app/canceltransaction",
-      // Optionally, add metadata: { userId: user?._id.toString() }
     });
     res.json({ url: session.url });
   } catch (error) {
@@ -99,7 +133,7 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// Stripe: Get session details
+// Retrieve details of a Stripe checkout session
 router.get("/checkout-session/:sessionId", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(

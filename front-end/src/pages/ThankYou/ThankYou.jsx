@@ -13,13 +13,11 @@ function ThankYou() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Get session_id from Stripe Checkout redirect URL
   const getSessionId = () => {
     const params = new URLSearchParams(location.search);
     return params.get("session_id");
   };
 
-  // Helper: Format date
   const formatDate = (dateString) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -42,7 +40,6 @@ function ThankYou() {
         .then((res) => {
           setUser(res.data.user);
           setLoading(false);
-          // Update Redux so the rest of the app sees the new premium status
           dispatch({
             type: "SIGNIN_SUCCESS",
             payload: {
@@ -55,7 +52,6 @@ function ThankYou() {
     } else {
       setLoading(false);
     }
-    // Only depend on location.search to avoid infinite loop!
   }, [location.search, dispatch]);
 
   return (

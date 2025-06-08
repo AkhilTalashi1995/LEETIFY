@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import "./Inner-Premium-Sub-Card.scss"; // Make sure this path is correct
+import "./Inner-Premium-Sub-Card.scss";
 
 const YEARLY_PRICE_ID = "price_1RWnzo03QVaE1lftYrV9ZMHZ";
 const MONTHLY_PRICE_ID = "price_1RWnzX03QVaE1lftUobIfe3M";

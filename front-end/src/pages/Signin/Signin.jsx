@@ -85,7 +85,6 @@ const SignIn = () => {
           <span>Don’t have an account?</span>
           <Link to="/signup">Sign up</Link>
         </div>
-        {/* Demo credentials for recruiters */}
         <div className="auth-demo">
           <div>
             <strong>Admin login:</strong>

@@ -13,13 +13,11 @@ const AdminDashboard = () => {
   const [userFetchError, setUserFetchError] = useState("");
 
   useEffect(() => {
-    // 1. Fetch submissions (no auth required)
     axios
       .get(`${process.env.REACT_APP_API_URL}/submissions`)
       .then((res) => setGetAllSubmissions(res.data.submissions || []))
       .catch((err) => console.log(err));
 
-    // 2. Prepare problem distribution
     let problemDist = { easy: 0, medium: 0, hard: 0 };
     problemList.forEach((problem) => {
       if (problem.difficulty === "Easy") problemDist.easy += 1;

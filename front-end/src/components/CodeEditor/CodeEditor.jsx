@@ -41,7 +41,7 @@ const CodeEditor = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/solutions`, data)
       .then((res) => {
-        setRunResults(res.data); // store whole response object!
+        setRunResults(res.data); 
         setShouldShowSkeleton(false);
       })
       .catch((err) => {
@@ -61,7 +61,7 @@ const CodeEditor = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/solutions`, data)
       .then((res) => {
-        setSubmitResults(res.data); // store whole response object!
+        setSubmitResults(res.data); 
         setShowSubmitResults(true);
         setShouldShowSkeleton(false);
         if (res.data.status === "Accepted") {
