@@ -1,7 +1,6 @@
 # Leetify
 
-Leetify is a modern, full-stack coding practice and interview preparation platform.  
-It helps students and professionals enhance their coding skills, track progress, and prepare for technical interviews—while providing premium features, progress tracking, and Stripe-based subscriptions.
+Leetify is a modern, full-stack coding practice and interview preparation platform. It helps students and professionals enhance their coding skills, track progress, and prepare for technical interviews—while providing premium features, progress tracking, and Stripe-based subscriptions.
 
 ---
 
